@@ -1,10 +1,8 @@
 package sptech.school.nail_api.service;
 
 import org.springframework.stereotype.Service;
-import sptech.school.nail_api.dto.user.UpdateRequestDTO;
-import sptech.school.nail_api.dto.user.UserResponseDTO;
-import sptech.school.nail_api.exception.UserAlreadyExistsException;
-import sptech.school.nail_api.exception.UserNotFoundException;
+import sptech.school.nail_api.exception.user.UserAlreadyExistsException;
+import sptech.school.nail_api.exception.user.UserNotFoundException;
 import sptech.school.nail_api.model.User;
 import sptech.school.nail_api.repository.UserRepository;
 

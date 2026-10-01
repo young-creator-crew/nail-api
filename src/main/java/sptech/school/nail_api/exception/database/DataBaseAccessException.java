@@ -1,4 +1,4 @@
-package sptech.school.nail_api.exception;
+package sptech.school.nail_api.exception.database;
 
 public class DataBaseAccessException extends RuntimeException {
     public DataBaseAccessException(String message) {

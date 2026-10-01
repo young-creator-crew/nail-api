@@ -6,6 +6,10 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import sptech.school.nail_api.dto.exception.StandardErrorResponseDTO;
+import sptech.school.nail_api.exception.auth.InvalidCredentialsException;
+import sptech.school.nail_api.exception.database.DataBaseAccessException;
+import sptech.school.nail_api.exception.user.UserAlreadyExistsException;
+import sptech.school.nail_api.exception.user.UserNotFoundException;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
