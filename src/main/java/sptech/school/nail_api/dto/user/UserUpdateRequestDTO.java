@@ -3,7 +3,7 @@ package sptech.school.nail_api.dto.user;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
-public class UpdateRequestDTO {
+public class UserUpdateRequestDTO {
 
     @NotBlank
     @Email(message = "The email cannot be null, empty, or contain only whitespace.")
@@ -11,10 +11,10 @@ public class UpdateRequestDTO {
     @NotBlank
     private String name;
 
-    public UpdateRequestDTO() {
+    public UserUpdateRequestDTO() {
     }
 
-    public UpdateRequestDTO(String email, String name) {
+    public UserUpdateRequestDTO(String email, String name) {
         this.email = email;
         this.name = name;
     }

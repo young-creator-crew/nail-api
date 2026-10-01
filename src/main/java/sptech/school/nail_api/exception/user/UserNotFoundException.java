@@ -1,4 +1,4 @@
-package sptech.school.nail_api.exception;
+package sptech.school.nail_api.exception.user;
 
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(String email) {

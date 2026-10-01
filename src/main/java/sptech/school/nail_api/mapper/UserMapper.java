@@ -1,7 +1,7 @@
 package sptech.school.nail_api.mapper;
 
 import sptech.school.nail_api.dto.auth.RegisterRequestDTO;
-import sptech.school.nail_api.dto.user.UpdateRequestDTO;
+import sptech.school.nail_api.dto.user.UserUpdateRequestDTO;
 import sptech.school.nail_api.dto.user.UserResponseDTO;
 import sptech.school.nail_api.model.User;
 
@@ -23,7 +23,7 @@ public class UserMapper {
         return user;
     }
 
-    public static User updateRequestToUser(UpdateRequestDTO dto) {
+    public static User updateRequestToUser(UserUpdateRequestDTO dto) {
         User user = new User();
         user.setEmail(dto.getEmail());
         user.setUsername(dto.getName());
