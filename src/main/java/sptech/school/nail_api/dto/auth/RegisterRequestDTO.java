@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public class RegisterRequest {
+public class RegisterRequestDTO {
 
     @NotBlank(message = "The email cannot be null, empty, or contain only whitespace.")
     @Email(message = "The email must be correctly formatted.")
@@ -17,10 +17,10 @@ public class RegisterRequest {
     @NotBlank
     private String name;
 
-    public RegisterRequest() {
+    public RegisterRequestDTO() {
     }
 
-    public RegisterRequest(String email, String password, String name) {
+    public RegisterRequestDTO(String email, String password, String name) {
         this.email = email;
         this.password = password;
         this.name = name;

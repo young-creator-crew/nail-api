@@ -3,7 +3,7 @@ package sptech.school.nail_api.dto.auth;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
-public class LoginRequest {
+public class LoginRequestDTO {
 
     @NotBlank(message = "The email cannot be null, empty, or contain only whitespace.")
     @Email(message = "The email must be correctly formatted.")
@@ -12,10 +12,10 @@ public class LoginRequest {
     @NotBlank(message = "The password cannot be null, empty, or contain only whitespace.")
     private String password;
 
-    public LoginRequest() {
+    public LoginRequestDTO() {
     }
 
-    public LoginRequest(String email, String password) {
+    public LoginRequestDTO(String email, String password) {
         this.email = email;
         this.password = password;
     }

@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import sptech.school.nail_api.dto.exception.StandardErrorResponse;
+import sptech.school.nail_api.dto.exception.StandardErrorResponseDTO;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -14,10 +14,10 @@ import java.time.ZoneId;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(DataBaseAccessException.class)
-    public ResponseEntity<StandardErrorResponse> handleDataBaseAccess(DataBaseAccessException exception, HttpServletRequest request) {
+    public ResponseEntity<StandardErrorResponseDTO> handleDataBaseAccess(DataBaseAccessException exception, HttpServletRequest request) {
         exception.printStackTrace();
 
-        StandardErrorResponse error = new StandardErrorResponse(
+        StandardErrorResponseDTO error = new StandardErrorResponseDTO(
                 LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
                 500,
                 "Internal Server Error",
@@ -29,10 +29,10 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(InvalidCredentialsException.class)
-    public ResponseEntity<StandardErrorResponse> handleInvalidCredentials(InvalidCredentialsException exception, HttpServletRequest request) {
+    public ResponseEntity<StandardErrorResponseDTO> handleInvalidCredentials(InvalidCredentialsException exception, HttpServletRequest request) {
         exception.printStackTrace();
 
-        StandardErrorResponse error = new StandardErrorResponse(
+        StandardErrorResponseDTO error = new StandardErrorResponseDTO(
                 LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
                 401,
                 "Unauthorized",
@@ -44,10 +44,10 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(UserAlreadyExistsException.class)
-    public ResponseEntity<StandardErrorResponse> handleUserAlreadyExists(UserAlreadyExistsException exception, HttpServletRequest request) {
+    public ResponseEntity<StandardErrorResponseDTO> handleUserAlreadyExists(UserAlreadyExistsException exception, HttpServletRequest request) {
         exception.printStackTrace();
 
-        StandardErrorResponse error = new StandardErrorResponse(
+        StandardErrorResponseDTO error = new StandardErrorResponseDTO(
                 LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
                 409,
                 "Conflict",
@@ -59,10 +59,10 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<StandardErrorResponse> handleUserNotFound(UserNotFoundException exception, HttpServletRequest request) {
+    public ResponseEntity<StandardErrorResponseDTO> handleUserNotFound(UserNotFoundException exception, HttpServletRequest request) {
         exception.printStackTrace();
 
-        StandardErrorResponse error = new StandardErrorResponse(
+        StandardErrorResponseDTO error = new StandardErrorResponseDTO(
                 LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
                 404,
                 "Not Found",
@@ -74,23 +74,23 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<StandardErrorResponse> handleValidationErrors(MethodArgumentNotValidException exception, HttpServletRequest request) {
+    public ResponseEntity<StandardErrorResponseDTO> handleValidationErrors(MethodArgumentNotValidException exception, HttpServletRequest request) {
 
-        StandardErrorResponse error = new StandardErrorResponse(
+        StandardErrorResponseDTO error = new StandardErrorResponseDTO(
                 LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
                 400,
                 "Bad Request",
-                "Invalid data, check the fields", // Mensagem estática e direta
+                "Invalid data, check the fields",
                 request.getRequestURI()
         );
 
         return ResponseEntity.status(400).body(error);
     }
 
-    public ResponseEntity<StandardErrorResponse> handleGenericException(Exception exception, HttpServletRequest request) {
+    public ResponseEntity<StandardErrorResponseDTO> handleGenericException(Exception exception, HttpServletRequest request) {
         exception.printStackTrace();
 
-        StandardErrorResponse error = new StandardErrorResponse(
+        StandardErrorResponseDTO error = new StandardErrorResponseDTO(
                 LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
                 500,
                 "Internal Server Error",

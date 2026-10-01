@@ -2,7 +2,7 @@ package sptech.school.nail_api.dto.exception;
 
 import java.time.LocalDateTime;
 
-public class StandardErrorResponse {
+public class StandardErrorResponseDTO {
 
     private LocalDateTime timestamp;
     private Integer status;
@@ -10,10 +10,10 @@ public class StandardErrorResponse {
     private String message;
     private String path;
 
-    public StandardErrorResponse() {
+    public StandardErrorResponseDTO() {
     }
 
-    public StandardErrorResponse(LocalDateTime timestamp, Integer status, String error, String message, String path) {
+    public StandardErrorResponseDTO(LocalDateTime timestamp, Integer status, String error, String message, String path) {
         this.timestamp = timestamp;
         this.status = status;
         this.error = error;

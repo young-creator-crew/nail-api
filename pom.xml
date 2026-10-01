@@ -22,13 +22,21 @@
 
 	<dependencies>
 
-		<!-- JDBC: acesso ao banco de dados usando JdbcTemplate -->
+		<!-- JPA: persistência de dados usando entidades Java (@Entity),
+		repositórios (JpaRepository) e Hibernate como implementação -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jdbc</artifactId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
-		<!-- Spring MVC: API REST, Controllers, Request/Response... -->
+		<!-- Testes para JPA e persistência de dados -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Spring MVC: criação da API REST, Controllers, Request/Response, endpoints HTTP, etc -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webmvc</artifactId>
@@ -59,14 +67,7 @@
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-			<version>3.0.3</version>
-		</dependency>
-
-		<!-- Testes para JDBC -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jdbc-test</artifactId>
-			<scope>test</scope>
+			<version>3.1.0</version>
 		</dependency>
 
 		<!-- Testes para Spring MVC -->
@@ -76,7 +77,7 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- Spring consegue acessar .env -->
+		<!-- Spring consegue acessar variáveis definidas no arquivo .env -->
 		<dependency>
 			<groupId>me.paulschwarz</groupId>
 			<artifactId>springboot4-dotenv</artifactId>

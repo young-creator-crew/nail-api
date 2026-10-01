@@ -1,12 +1,14 @@
 package sptech.school.nail_api.service;
 
 import org.springframework.stereotype.Service;
-import sptech.school.nail_api.dto.user.UpdateRequest;
-import sptech.school.nail_api.dto.user.UserResponse;
+import sptech.school.nail_api.dto.user.UpdateRequestDTO;
+import sptech.school.nail_api.dto.user.UserResponseDTO;
 import sptech.school.nail_api.exception.UserAlreadyExistsException;
 import sptech.school.nail_api.exception.UserNotFoundException;
 import sptech.school.nail_api.model.User;
 import sptech.school.nail_api.repository.UserRepository;
+
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -17,40 +19,23 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public UserResponse getProfile(Integer id) {
-        User user = userRepository.findById(id);
-
-        if (user == null) { throw new UserNotFoundException(id); }
-
-        return new UserResponse(user.getId(), user.getEmail(), user.getUsername());
+    public User get(Integer id) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isEmpty()) { throw new UserNotFoundException(id); }
+        return user.get();
     }
 
-    public UserResponse updateUser(UpdateRequest request, Integer id) {
-        User user = userRepository.findById(id);
-
-        if (user == null) { throw new UserNotFoundException(id); }
-
-        if (request.getEmail() != null && !request.getEmail().equals(user.getEmail())) {
-            User duplicateEmail = userRepository.findByEmail(request.getEmail());
-            if (duplicateEmail != null) {
-                throw new UserAlreadyExistsException();
-            }
-            user.setEmail(request.getEmail());
-        }
-
-        if (request.getName() != null && !request.getName().equals(user.getUsername())) {
-            user.setUsername(request.getName());
-        }
-
-        userRepository.update(user);
-
-        return new UserResponse(user.getId(), user.getEmail(), user.getUsername());
+    public User update(User request, Integer id) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isEmpty()) { throw new UserNotFoundException(id); }
+        if (userRepository.existsByEmailAndIdNot(request.getEmail(), id)) { throw new UserAlreadyExistsException();}
+        return userRepository.save(request);
     }
 
-    public void deleteUser(Integer id) {
+    public void delete(Integer id) {
         if (!userRepository.existsById(id)) {
             throw new UserNotFoundException(id);
         }
-        userRepository.remove(id);
+        userRepository.deleteById(id);
     }
 }

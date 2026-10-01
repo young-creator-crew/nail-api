@@ -1,19 +1,26 @@
 package sptech.school.nail_api.dto.user;
 
-import jakarta.validation.constraints.Email;
+public class UserResponseDTO {
 
-public class UpdateRequest {
-
-    @Email(message = "The email cannot be null, empty, or contain only whitespace.")
+    private Integer id;
     private String email;
     private String name;
 
-    public UpdateRequest() {
+    public UserResponseDTO() {
     }
 
-    public UpdateRequest(String email, String name) {
+    public UserResponseDTO(Integer id, String email, String name) {
+        this.id = id;
         this.email = email;
         this.name = name;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getEmail() {
