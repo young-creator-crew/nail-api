@@ -1,13 +1,11 @@
 package sptech.school.nail_api.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalTime;
 
 @Entity
+@Table(name = "nail_services")
 public class Procedure {
 
     @Id
