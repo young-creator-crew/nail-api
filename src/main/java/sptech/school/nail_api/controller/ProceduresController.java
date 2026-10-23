@@ -9,6 +9,9 @@ import sptech.school.nail_api.mapper.ProceduresMapper;
 import sptech.school.nail_api.model.Procedure;
 import sptech.school.nail_api.service.ProceduresService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/procedures")
 public class ProceduresController {
@@ -17,6 +20,18 @@ public class ProceduresController {
 
     public ProceduresController(ProceduresService proceduresService) {
         this.proceduresService = proceduresService;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ProceduresResponseDTO>> getProcedures() {
+        List<Procedure> procedures = proceduresService.getAll();
+        List<ProceduresResponseDTO> response = new ArrayList<>();
+
+        for (Procedure procedure : procedures) {
+            response.add(ProceduresMapper.procedureToProcedureResponse(procedure));
+        }
+
+        return ResponseEntity.status(200).body(response);
     }
 
     @GetMapping("/{id}")

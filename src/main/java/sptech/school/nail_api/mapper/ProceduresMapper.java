@@ -11,6 +11,8 @@ public class ProceduresMapper {
             procedure.getId(),
             procedure.getName(),
             procedure.getPrice(),
+                procedure.getCategory(),
+                procedure.getDescription(),
             procedure.getEstimatedDurationMinutes()
             );
         }
@@ -18,6 +20,8 @@ public class ProceduresMapper {
     public static Procedure registerRequestToProcedure(ProceduresRequestDTO dto){
         Procedure procedure = new Procedure();
         procedure.setName(dto.getName());
+        procedure.setCategory(dto.getCategory());
+        procedure.setDescription(dto.getDescription());
         procedure.setPrice(dto.getPrice());
         procedure.setEstimatedDurationMinutes(dto.getEstimatedDurationMinutes());
 
@@ -27,6 +31,8 @@ public class ProceduresMapper {
     public static Procedure updateRequestToProcedure(ProceduresRequestDTO dto){
         Procedure procedure = new Procedure();
         procedure.setName(dto.getName());
+        procedure.setCategory(dto.getCategory());
+        procedure.setDescription(dto.getDescription());
         procedure.setPrice(dto.getPrice());
         procedure.setEstimatedDurationMinutes(dto.getEstimatedDurationMinutes());
 
