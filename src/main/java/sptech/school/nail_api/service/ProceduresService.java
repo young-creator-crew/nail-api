@@ -5,6 +5,7 @@ import sptech.school.nail_api.exception.procedure.ProcedureNotFoundException;
 import sptech.school.nail_api.model.Procedure;
 import sptech.school.nail_api.repository.ProceduresRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -13,6 +14,10 @@ public class ProceduresService {
 
     public ProceduresService(ProceduresRepository proceduresRepository) {
         this.proceduresRepository = proceduresRepository;
+    }
+
+    public List<Procedure> getAll() {
+        return proceduresRepository.findAll();
     }
 
     public Procedure get(Integer id) {
@@ -28,8 +33,11 @@ public class ProceduresService {
     public Procedure update(Procedure request, Integer id) {
         Procedure procedure = get(id);
         procedure.setName(request.getName());
+        procedure.setCategory(request.getCategory());
+        procedure.setDescription(request.getDescription());
         procedure.setPrice(request.getPrice());
-        procedure.setEstimatedDurationMinutes(request.getEstimatedDurationMinutes());
+        procedure.setEstimatedDurationMinutes(
+                request.getEstimatedDurationMinutes());
         return proceduresRepository.save(procedure);
     }
 

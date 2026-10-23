@@ -4,15 +4,19 @@ public class ProceduresResponseDTO {
     private Integer id;
     private String name;
     private Double price;
+    private String category;
+    private String description;
     private Integer estimatedDurationMinutes;
 
     public ProceduresResponseDTO() {
     }
 
-    public ProceduresResponseDTO(Integer id, String name, Double price, Integer estimatedDurationMinutes) {
+    public ProceduresResponseDTO(Integer id, String name, Double price, String category, String description, Integer estimatedDurationMinutes) {
         this.id = id;
         this.name = name;
         this.price = price;
+        this.category = category;
+        this.description = description;
         this.estimatedDurationMinutes = estimatedDurationMinutes;
     }
 
@@ -30,6 +34,22 @@ public class ProceduresResponseDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Double getPrice() {
