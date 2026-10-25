@@ -17,12 +17,29 @@ public class DashboardService {
     }
 
     public Integer getTotalAppointmentsWeek() {
-
         LocalDate today = LocalDate.now();
         LocalDate startOfWeek = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
         LocalDate endOfWeek = today.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
         Long totalAppointments = dashboardRepository.countByAppointmentDateBetween(startOfWeek, endOfWeek);
 
         return Math.toIntExact(totalAppointments);
+    }
+
+    public Integer getCompletedAppointmentsWeek() {
+        LocalDate today = LocalDate.now();
+        LocalDate startOfWeek = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+        LocalDate endOfWeek = today.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
+        Long completedAppointments = dashboardRepository.countCompletedAppointmentsBetween(startOfWeek, endOfWeek);
+
+        return Math.toIntExact(completedAppointments);
+    }
+
+    public Integer getCanceledAppointmentsWeek() {
+        LocalDate today = LocalDate.now();
+        LocalDate startOfWeek = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+        LocalDate endOfWeek = today.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
+        Long canceledAppointments = dashboardRepository.countCanceledAppointmentsBetween(startOfWeek, endOfWeek);
+
+        return Math.toIntExact(canceledAppointments);
     }
 }
