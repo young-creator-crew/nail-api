@@ -20,8 +20,14 @@ public class DashboardController {
 
     @GetMapping
     public ResponseEntity<DashboardResponseDTO> getDashboard() {
-        Integer totalAppointmentWeek = dashboardService.getTotalAppointmentsWeek();
-        DashboardResponseDTO responseDTO = DashboardMapper.dashboardToDashboardResponse(totalAppointmentWeek, null, null);
+        Integer totalAppointmentsWeek = dashboardService.getTotalAppointmentsWeek();
+        Integer completedAppointments = dashboardService.getCompletedAppointmentsWeek();
+        Integer canceledAppointments = dashboardService.getCanceledAppointmentsWeek();
+
+        DashboardResponseDTO responseDTO = DashboardMapper.dashboardToDashboardResponse(
+                totalAppointmentsWeek,
+                completedAppointments,
+                canceledAppointments);
 
         return ResponseEntity.status(200).body(responseDTO);
     }
