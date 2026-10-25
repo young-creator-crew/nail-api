@@ -12,6 +12,7 @@ public class Procedure {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idNailService")
     private Integer id;
+    @Column(name = "service_name")
     private String name;
     private String category;
     private String description;
