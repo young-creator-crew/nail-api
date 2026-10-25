@@ -7,17 +7,27 @@ public class ProceduresResponseDTO {
     private String category;
     private String description;
     private Integer estimatedDurationMinutes;
+    private String photoUrl;
 
     public ProceduresResponseDTO() {
     }
 
-    public ProceduresResponseDTO(Integer id, String name, Double price, String category, String description, Integer estimatedDurationMinutes) {
+    public ProceduresResponseDTO(Integer id, String name, Double price, String category, String description, Integer estimatedDurationMinutes, String photoUrl) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.category = category;
         this.description = description;
         this.estimatedDurationMinutes = estimatedDurationMinutes;
+        this.photoUrl = photoUrl;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 
     public Integer getId() {

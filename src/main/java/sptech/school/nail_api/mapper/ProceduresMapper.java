@@ -13,7 +13,8 @@ public class ProceduresMapper {
             procedure.getPrice(),
                 procedure.getCategory(),
                 procedure.getDescription(),
-            procedure.getEstimatedDurationMinutes()
+            procedure.getEstimatedDurationMinutes(),
+                procedure.getPhotoUrl()
             );
         }
 
