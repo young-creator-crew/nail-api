@@ -10,19 +10,30 @@ public class Procedure {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idNailService")
     private Integer id;
+    @Column(name = "service_name")
     private String name;
+    private String category;
+    private String description;
     private Double price;
+    @Column(name = "estimatedDurationMinutes")
     private Integer estimatedDurationMinutes;
+    @Column(name = "photo_url")
+    private String photoUrl;
+
 
     public Procedure() {
     }
 
-    public Procedure(Integer id, String name, Double price, Integer estimatedDurationMinutes) {
+    public Procedure(Integer id, String name, String category, String description, Double price, Integer estimatedDurationMinutes, String photoUrl) {
         this.id = id;
         this.name = name;
+        this.category = category;
+        this.description = description;
         this.price = price;
         this.estimatedDurationMinutes = estimatedDurationMinutes;
+        this.photoUrl = photoUrl;
     }
 
     public Integer getId() {
@@ -41,6 +52,22 @@ public class Procedure {
         this.name = name;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Double getPrice() {
         return price;
     }
@@ -55,5 +82,13 @@ public class Procedure {
 
     public void setEstimatedDurationMinutes(Integer estimatedDurationMinutes) {
         this.estimatedDurationMinutes = estimatedDurationMinutes;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 }

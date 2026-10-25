@@ -9,6 +9,12 @@ public class ProceduresRequestDTO {
     @NotBlank(message = "The name cannot be null, empty, or contain only whitespace.")
     private String name;
 
+    @NotBlank(message = "The category cannot be null, empty, or contain only whitespace.")
+    private String category;
+
+    @NotBlank(message = "The description cannot be null, empty, or contain only whitespace.")
+    private String description;
+
     @NotNull(message = "The price cannot be null.")
     @PositiveOrZero(message = "The price must be greater than or equal to zero.")
     private Double price;
@@ -17,14 +23,18 @@ public class ProceduresRequestDTO {
     @Positive(message = "The estimated duration must be greater than zero.")
     private Integer estimatedDurationMinutes;
 
+
     public ProceduresRequestDTO() {
     }
 
-    public ProceduresRequestDTO(String name, Double price, Integer estimatedDurationMinutes) {
+    public ProceduresRequestDTO(String name, String category, String description, Double price, Integer estimatedDurationMinutes) {
         this.name = name;
+        this.category = category;
+        this.description = description;
         this.price = price;
         this.estimatedDurationMinutes = estimatedDurationMinutes;
     }
+
 
     public String getName() {
         return name;
@@ -32,6 +42,22 @@ public class ProceduresRequestDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Double getPrice() {
@@ -49,5 +75,4 @@ public class ProceduresRequestDTO {
     public void setEstimatedDurationMinutes(Integer estimatedDurationMinutes) {
         this.estimatedDurationMinutes = estimatedDurationMinutes;
     }
-
 }
