@@ -17,11 +17,10 @@ public class DashboardService {
     }
 
     public Integer getTotalAppointmentsWeek() {
-        LocalDate today = LocalDate.now();
 
+        LocalDate today = LocalDate.now();
         LocalDate startOfWeek = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
         LocalDate endOfWeek = today.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
-
         Long totalAppointments = dashboardRepository.countByAppointmentDateBetween(startOfWeek, endOfWeek);
 
         return Math.toIntExact(totalAppointments);
