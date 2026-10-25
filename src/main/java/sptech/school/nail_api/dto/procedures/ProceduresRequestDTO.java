@@ -23,6 +23,7 @@ public class ProceduresRequestDTO {
     @Positive(message = "The estimated duration must be greater than zero.")
     private Integer estimatedDurationMinutes;
 
+
     public ProceduresRequestDTO() {
     }
 
