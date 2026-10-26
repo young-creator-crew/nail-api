@@ -13,25 +13,25 @@ public class Procedure {
     @Column(name = "id_nail_service")
     private Integer id;
 
-    @Column(name = "service_name", nullable = false, length = 100)
+    @Column(name = "service_name")
     private String name;
 
-    @Column(name = "category", length = 25)
+    @Column(name = "category")
     private String category;
 
-    @Column(name = "service_description", length = 100)
+    @Column(name = "service_description")
     private String description;
 
-    @Column(name = "price", nullable = false, precision = 10, scale = 2)
+    @Column(name = "price")
     private Double price;
 
-    @Column(name = "estimated_duration_minutes", nullable = false)
+    @Column(name = "estimated_duration_minutes")
     private Integer estimatedDurationMinutes;
 
-    @Column(name = "photo_url", length = 200)
+    @Column(name = "photo_url")
     private String photoUrl;
 
-    @Column(name = "is_active", nullable = false)
+    @Column(name = "is_active")
     private Boolean isActive = true;
 
 
