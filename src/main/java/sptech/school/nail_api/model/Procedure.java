@@ -10,17 +10,29 @@ public class Procedure {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idNailService")
+    @Column(name = "id_nail_service")
     private Integer id;
+
     @Column(name = "service_name")
     private String name;
+
+    @Column(name = "category")
     private String category;
+
+    @Column(name = "service_description")
     private String description;
+
+    @Column(name = "price")
     private Double price;
-    @Column(name = "estimatedDurationMinutes")
+
+    @Column(name = "estimated_duration_minutes")
     private Integer estimatedDurationMinutes;
+
     @Column(name = "photo_url")
     private String photoUrl;
+
+    @Column(name = "is_active")
+    private Boolean isActive = true;
 
 
     public Procedure() {
