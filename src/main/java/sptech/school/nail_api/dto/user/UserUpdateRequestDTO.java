@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-@Schema(name = "UserUpdateRequest", description = "Dados necessários para atualizar o perfil de um usuário.")
+@Schema(description = "Dados necessários para atualizar o perfil de um usuário.")
 public class UserUpdateRequestDTO {
 
     @NotBlank(message = "The name cannot be blank.")

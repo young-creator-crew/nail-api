@@ -3,7 +3,7 @@ package sptech.school.nail_api.dto.user;
 import io.swagger.v3.oas.annotations.media.Schema;
 import sptech.school.nail_api.enums.UserType;
 
-@Schema(name = "UserResponse", description = "Dados públicos retornados nas operações de usuário.")
+@Schema(description = "Dados públicos retornados nas operações de usuário.")
 public class UserResponseDTO {
 
     @Schema(description = "Identificador do usuário.", example = "1")

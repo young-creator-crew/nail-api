@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-@Schema(name = "RegisterRequest", description = "Dados necessários para cadastrar um novo usuário.")
+@Schema(description = "Dados necessários para cadastrar um novo usuário.")
 public class RegisterRequestDTO {
 
     @NotBlank(message = "The name cannot be blank.")

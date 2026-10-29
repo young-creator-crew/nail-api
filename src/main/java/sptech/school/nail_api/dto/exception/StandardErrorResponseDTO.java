@@ -1,13 +1,24 @@
 package sptech.school.nail_api.dto.exception;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDateTime;
 
+@Schema(description = "DTO padrão para representar erros retornados pela API.")
 public class StandardErrorResponseDTO {
 
+    @Schema(description = "Data e hora em que o erro ocorreu.", type = "string", format = "date-time", example = "2026-10-29T13:51:00")
     private LocalDateTime timestamp;
+
+    @Schema(description = "Código HTTP do erro.", example = "400")
     private Integer status;
+
+    @Schema(description = "Descrição padrão do erro HTTP.", example = "Bad Request")
     private String error;
+
+    @Schema(description = "Mensagem detalhada explicando a causa do erro.", example = "O campo email possui um formato inválido.")
     private String message;
+
+    @Schema(description = "Caminho da requisição que gerou o erro.", example = "/api/users")
     private String path;
 
     public StandardErrorResponseDTO() {

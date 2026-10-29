@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-@Schema(name = "LoginRequest", description = "Credenciais utilizadas para autenticar um usuário.")
+@Schema(description = "Credenciais utilizadas para autenticar um usuário.")
 public class LoginRequestDTO {
 
     @NotBlank(message = "The email cannot be null, empty, or contain only whitespace.")
