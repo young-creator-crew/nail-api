@@ -55,7 +55,7 @@ public class GlobalExceptionHandler {
                 LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
                 409,
                 "Conflict",
-                "User already exists in the database",
+                "User with this credentials already exists in the database",
                 request.getRequestURI()
         );
 

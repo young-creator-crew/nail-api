@@ -1,10 +1,16 @@
 package sptech.school.nail_api.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import sptech.school.nail_api.model.User;
+import sptech.school.nail_api.entity.User;
+
+import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-    User findByEmail(String email);
-    Boolean existsByEmailAndIdNot(String email, Integer id);
+    Optional<User> findByEmail(String email);
+
+    boolean existsByEmail(String email);
+
+    boolean existsByEmailAndIdUserNot(String email, Integer idUser);
+
 }

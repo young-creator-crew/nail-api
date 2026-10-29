@@ -1,32 +1,27 @@
 package sptech.school.nail_api.mapper;
 
 import sptech.school.nail_api.dto.auth.RegisterRequestDTO;
-import sptech.school.nail_api.dto.user.UserUpdateRequestDTO;
 import sptech.school.nail_api.dto.user.UserResponseDTO;
-import sptech.school.nail_api.model.User;
+import sptech.school.nail_api.entity.User;
 
 public class UserMapper {
 
     public static UserResponseDTO userToUserResponse(User user) {
         return new UserResponseDTO(
-                user.getId(),
+                user.getIdUser(),
                 user.getEmail(),
-                user.getUsername()
+                user.getUserName(),
+                user.getPhone(),
+                user.getUserType()
         );
     }
 
     public static User registerRequestToUser(RegisterRequestDTO dto) {
         User user = new User();
-        user.setEmail(dto.getEmail());
-        user.setPassword(dto.getPassword());
-        user.setUsername(dto.getName());
-        return user;
-    }
 
-    public static User updateRequestToUser(UserUpdateRequestDTO dto) {
-        User user = new User();
-        user.setEmail(dto.getEmail());
-        user.setUsername(dto.getName());
+        user.setUserName(dto.getName());
+        user.setPhone(dto.getPhone());
+
         return user;
     }
 
