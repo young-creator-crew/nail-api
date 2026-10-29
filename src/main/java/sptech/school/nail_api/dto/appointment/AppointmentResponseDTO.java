@@ -3,26 +3,59 @@ package sptech.school.nail_api.dto.appointment;
 import sptech.school.nail_api.enums.AppointmentStatus;
 import sptech.school.nail_api.enums.OptionType;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class AppointmentResponseDTO {
 
+    @Schema(description = "Identificador do agendamento.", example = "10")
     private Integer idAppointment;
+
+    @Schema(description = "Identificador do cliente.", example = "5")
     private Integer clientId;
+
+    @Schema(description = "Nome do cliente.", example = "Maria Silva")
     private String clientName;
+
+    @Schema(description = "E-mail do cliente.", example = "maria@email.com")
     private String clientEmail;
+
+    @Schema(description = "Telefone do cliente.", example = "11987654321")
     private String clientPhone;
+
+    @Schema(description = "Nome do serviço contratado.", example = "Alongamento em Gel")
     private String serviceName;
+
+    @Schema(description = "Modalidade contratada.", example = "APLICACAO")
     private OptionType optionType;
+
+    @Schema(description = "Data e horário de início.", type = "string", format = "date-time", example = "2026-10-30T09:00:00")
     private LocalDateTime scheduledStartAt;
+
+    @Schema(description = "Data e horário previstos para o término.", type = "string", format = "date-time", example = "2026-10-30T10:30:00")
     private LocalDateTime scheduledEndAt;
+
+    @Schema(description = "Preço da modalidade no momento do agendamento.", example = "120.00")
     private BigDecimal servicePrice;
+
+    @Schema(description = "Nome do adicional contratado, se houver.", example = "Decoração")
     private String addonName;
+
+    @Schema(description = "Preço do adicional no momento do agendamento.", example = "15.00")
     private BigDecimal addonPrice;
+
+    @Schema(description = "Valor total contratado.", example = "135.00")
     private BigDecimal appointmentValue;
+
+    @Schema(description = "Status atual do agendamento.", example = "CONFIRMADO")
     private AppointmentStatus appointmentStatus;
+
+    @Schema(description = "Data de criação do registro.", type = "string", format = "date-time", example = "2026-10-20T14:30:00")
     private LocalDateTime createdAt;
+
+    @Schema(description = "Data da última atualização do registro.", type = "string", format = "date-time", example = "2026-10-20T14:35:00")
     private LocalDateTime updatedAt;
 
     public AppointmentResponseDTO() {
