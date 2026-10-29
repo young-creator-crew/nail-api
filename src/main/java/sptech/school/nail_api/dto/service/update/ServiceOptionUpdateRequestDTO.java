@@ -9,24 +9,24 @@ import sptech.school.nail_api.enums.OptionType;
 
 import java.math.BigDecimal;
 
-@Schema(description = "Request data for updating or creating a service modality.")
+@Schema(description = "Solicitar dados para atualização ou criação de uma modalidade de serviço.")
 public class ServiceOptionUpdateRequestDTO {
 
-    @Schema(description = "Identifier of an existing service modality. If omitted, a new modality will be created.", example = "10", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @Schema(description = "Identificador de uma modalidade de serviço existente. Se omitido, uma nova modalidade será criada.", example = "10", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     @Positive(message = "The service option ID must be positive.")
     private Integer idNailServiceOption;
 
-    @Schema(description = "Type of service modality.", example = "APLICACAO", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Tipo de modalidade de serviço.", example = "APLICACAO", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "The service modality is required.")
     private OptionType optionType;
 
-    @Schema(description = "Price charged for this service modality.", example = "120.00", minimum = "0", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Preço cobrado por esta modalidade de serviço.", example = "120.00", minimum = "0", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "The price is required.")
     @DecimalMin(value = "0.00", message = "The price must be greater than or equal to zero.")
     @Digits(integer = 8, fraction = 2, message = "The price must have at most 8 integer digits and 2 decimal places.")
     private BigDecimal price;
 
-    @Schema(description = "Estimated duration of the modality, in minutes.", example = "90", minimum = "1", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Duração estimada da modalidade, em minutos.", example = "90", minimum = "1", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "The estimated duration is required.")
     @Positive(message = "The estimated duration must be greater than zero.")
     private Integer durationMinutes;

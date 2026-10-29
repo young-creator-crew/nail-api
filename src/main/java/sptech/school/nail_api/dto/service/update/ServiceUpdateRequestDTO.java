@@ -10,20 +10,20 @@ import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
-@Schema(description = "Request data for updating a service, including its complete list of modalities and addons.")
+@Schema(description = "Solicitar dados para a atualização de um serviço, incluindo sua lista completa de modalidades e complementos.")
 public class ServiceUpdateRequestDTO {
 
-    @Schema(description = "Name of the service.", example = "Gel nail extensions", maxLength = 100, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Nome do serviço.", example = "Alongamento de unhas em gel", maxLength = 100, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank(message = "The service name is required.")
     @Size(max = 100, message = "The service name must not exceed 100 characters.")
     private String serviceName;
 
-    @Schema(description = "Description of the service.", example = "Nail extensions using gel.", maxLength = 500, nullable = true, requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @Schema(description = "Descrição do serviço.", example = "Alongamento de unhas com gel.", maxLength = 500, nullable = true, requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     @Size(max = 500, message = "The service description must not exceed 500 characters.")
     private String serviceDescription;
 
     @ArraySchema(
-            arraySchema = @Schema(description = "Complete list of service modalities to retain or create. Existing modalities omitted from this list will be deactivated.", requiredMode = Schema.RequiredMode.REQUIRED),
+            arraySchema = @Schema(description = "Lista completa das modalidades de serviço a serem mantidas ou criadas. As modalidades existentes que não constarem desta lista serão desativadas.", requiredMode = Schema.RequiredMode.REQUIRED),
             schema = @Schema(implementation = ServiceOptionUpdateRequestDTO.class)
     )
     @NotEmpty(message = "At least one service modality is required.")
@@ -31,7 +31,7 @@ public class ServiceUpdateRequestDTO {
     private List<ServiceOptionUpdateRequestDTO> options;
 
     @ArraySchema(
-            arraySchema = @Schema(description = "Complete list of addons to retain or create. Use an empty array if there are no addons. Existing addons omitted from this list will be deactivated.", requiredMode = Schema.RequiredMode.REQUIRED),
+            arraySchema = @Schema(description = "Lista completa de complementos a manter ou criar. Use um array vazio caso não haja complementos. Complementos existentes que não constarem nesta lista serão desativados.", requiredMode = Schema.RequiredMode.REQUIRED),
             schema = @Schema(implementation = ServiceAddonUpdateRequestDTO.class)
     )
     @NotNull(message = "The addons list is required. Use an empty list if there are no addons.")

@@ -2,22 +2,22 @@ package sptech.school.nail_api.dto.service.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Summary response data for a service.")
+@Schema(description = "Dados de resposta resumidos para um serviço.")
 public class ServiceSummaryResponseDTO {
 
-    @Schema(description = "Unique identifier of the service.", example = "1", accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "Identificador exclusivo do serviço.", example = "1", accessMode = Schema.AccessMode.READ_ONLY)
     private Integer idNailService;
 
-    @Schema(description = "Name of the service.", example = "Gel nail extensions")
+    @Schema(description = "Nome do serviço.", example = "Alongamento de unhas em gel")
     private String serviceName;
 
-    @Schema(description = "Description of the service.", example = "Nail extensions using gel.", nullable = true)
+    @Schema(description = "Descrição do serviço.", example = "Alongamento de unhas com gel.", nullable = true)
     private String serviceDescription;
 
-    @Schema(description = "URL of the service photo.", example = "/fotos/2f59a2d0.jpg", nullable = true)
+    @Schema(description = "URL da foto do serviço.", example = "/fotos/2f59a2d0.jpg", nullable = true)
     private String photoUrl;
 
-    @Schema(description = "Indicates whether the service is active.", example = "true")
+    @Schema(description = "Indica se o serviço está ativo.", example = "true")
     private Boolean active;
 
     public ServiceSummaryResponseDTO() {

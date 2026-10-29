@@ -4,16 +4,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.math.BigDecimal;
 
-@Schema(description = "Response data for a service addon.")
+@Schema(description = "Dados de resposta para um complemento de serviço.")
 public class ServiceAddonResponseDTO {
 
-    @Schema(description = "Unique identifier of the service addon.", example = "20", accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "Identificador exclusivo do complemento de serviço.", example = "20", accessMode = Schema.AccessMode.READ_ONLY)
     private Integer idNailServiceAddon;
 
-    @Schema(description = "Name of the addon.", example = "Nail art")
+    @Schema(description = "Nome do complemento.", example = "Nail art")
     private String addonName;
 
-    @Schema(description = "Additional price charged for the addon.", example = "15.00", minimum = "0")
+    @Schema(description = "Preço adicional cobrado pelo complemento.", example = "15.00", minimum = "0")
     private BigDecimal additionalPrice;
 
     public ServiceAddonResponseDTO() {

@@ -10,19 +10,19 @@ import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
 
-@Schema(description = "Request data for updating or creating a service addon.")
+@Schema(description = "Solicitar dados para atualizar ou criar um complemento de serviço.")
 public class ServiceAddonUpdateRequestDTO {
 
-    @Schema(description = "Identifier of an existing addon. If omitted, a new addon will be created.", example = "20", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @Schema(description = "Identificador de um complemento existente. Se omitido, um novo complemento será criado.", example = "20", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     @Positive(message = "The service addon ID must be positive.")
     private Integer idNailServiceAddon;
 
-    @Schema(description = "Name of the addon.", example = "Nail art", maxLength = 100, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Nome do complemento.", example = "Nail art", maxLength = 100, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank(message = "The addon name is required.")
     @Size(max = 100, message = "The addon name must not exceed 100 characters.")
     private String addonName;
 
-    @Schema(description = "Additional price charged for the addon.", example = "15.00", minimum = "0", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Preço adicional cobrado pelo complemento.", example = "15.00", minimum = "0", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "The additional price is required.")
     @DecimalMin(value = "0.00", message = "The additional price must be greater than or equal to zero.")
     @Digits(integer = 8, fraction = 2, message = "The additional price must have at most 8 integer digits and 2 decimal places.")

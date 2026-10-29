@@ -1,14 +1,22 @@
 package sptech.school.nail_api.service;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
+import sptech.school.nail_api.dto.dashboard.DashboardResponseDTO;
+import sptech.school.nail_api.mapper.DashboardMapper;
 import sptech.school.nail_api.repository.DashboardRepository;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.temporal.TemporalAdjusters;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 @Service
 public class DashboardService {
+
+    private static final long MAX_PERIOD_DAYS = 366;
 
     private final DashboardRepository dashboardRepository;
 
@@ -16,30 +24,35 @@ public class DashboardService {
         this.dashboardRepository = dashboardRepository;
     }
 
-    public Integer getTotalAppointmentsWeek() {
-        LocalDate today = LocalDate.now();
-        LocalDate startOfWeek = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
-        LocalDate endOfWeek = today.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
-        Long totalAppointments = dashboardRepository.countByAppointmentDateBetween(startOfWeek, endOfWeek);
+    @Transactional(readOnly = true)
+    public DashboardResponseDTO getSummary(LocalDate startDate, LocalDate endDate) {
 
-        return Math.toIntExact(totalAppointments);
-    }
+        if (startDate == null || endDate == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Both startDate and endDate are required.");
+        }
 
-    public Integer getCompletedAppointmentsWeek() {
-        LocalDate today = LocalDate.now();
-        LocalDate startOfWeek = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
-        LocalDate endOfWeek = today.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
-        Long completedAppointments = dashboardRepository.countCompletedAppointmentsBetween(startOfWeek, endOfWeek);
+        if (endDate.isBefore(startDate)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The end date must not be before the start date.");
+        }
 
-        return Math.toIntExact(completedAppointments);
-    }
+        long periodDays = ChronoUnit.DAYS.between(startDate, endDate) + 1;
 
-    public Integer getCanceledAppointmentsWeek() {
-        LocalDate today = LocalDate.now();
-        LocalDate startOfWeek = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
-        LocalDate endOfWeek = today.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
-        Long canceledAppointments = dashboardRepository.countCanceledAppointmentsBetween(startOfWeek, endOfWeek);
+        if (periodDays > MAX_PERIOD_DAYS) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The reporting period must not exceed 366 days.");
+        }
 
-        return Math.toIntExact(canceledAppointments);
+        LocalDateTime startDateTime = startDate.atStartOfDay();
+        LocalDateTime endDateExclusive = endDate.plusDays(1).atStartOfDay();
+
+        List<Object[]> kpiRows = dashboardRepository.findKpis(startDateTime, endDateExclusive);
+
+        List<Object[]> dailyStatuses = dashboardRepository.findDailyStatuses(startDateTime, endDateExclusive);
+
+        return DashboardMapper.toResponse(
+                startDate,
+                endDate,
+                kpiRows.getFirst(),
+                dailyStatuses
+        );
     }
 }

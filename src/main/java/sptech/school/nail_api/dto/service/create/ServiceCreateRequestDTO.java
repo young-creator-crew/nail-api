@@ -10,20 +10,20 @@ import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
-@Schema(description = "Request data for creating a complete service, including its modalities and addons.")
+@Schema(description = "Solicitar dados para a criação de um serviço completo, incluindo suas modalidades e complementos.")
 public class ServiceCreateRequestDTO {
 
-    @Schema(description = "Name of the service.", example = "Gel nail extensions", maxLength = 100, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Nome do serviço.", example = "Alongamento de unhas em gel", maxLength = 100, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank(message = "The service name is required.")
     @Size(max = 100, message = "The service name must not exceed 100 characters.")
     private String serviceName;
 
-    @Schema(description = "Description of the service.", example = "Nail extensions using gel.", maxLength = 500, requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @Schema(description = "Descrição do serviço.", example = "Alongamento de unhas com gel.", maxLength = 500, requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     @Size(max = 500, message = "The service description must not exceed 500 characters.")
     private String serviceDescription;
 
     @ArraySchema(
-            arraySchema = @Schema(description = "Service modalities available for this service.", requiredMode = Schema.RequiredMode.REQUIRED),
+            arraySchema = @Schema(description = "Modalidades de atendimento disponíveis para este serviço.", requiredMode = Schema.RequiredMode.REQUIRED),
             schema = @Schema(implementation = ServiceOptionCreateRequestDTO.class)
     )
     @NotEmpty(message = "At least one service modality is required.")
@@ -31,7 +31,7 @@ public class ServiceCreateRequestDTO {
     private List<ServiceOptionCreateRequestDTO> options;
 
     @ArraySchema(
-            arraySchema = @Schema(description = "Addons available for this service. Send an empty array if the service has no addons.", requiredMode = Schema.RequiredMode.REQUIRED),
+            arraySchema = @Schema(description = "Complementos disponíveis para este serviço. Envie um array vazio caso o serviço não possua complementos.", requiredMode = Schema.RequiredMode.REQUIRED),
             schema = @Schema(implementation = ServiceAddonCreateRequestDTO.class)
     )
     @NotNull(message = "The addons list is required. Use an empty list if there are no addons.")

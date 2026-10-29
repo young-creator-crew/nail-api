@@ -1,41 +1,68 @@
 package sptech.school.nail_api.dto.dashboard;
 
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.time.LocalDate;
+import java.util.List;
+
+@Schema(description = "Resumo do painel para um intervalo de datas selecionado.")
 public class DashboardResponseDTO {
 
-    private Integer totalAppointmentsWeek;
-    private Integer completedAppointments;
-    private Integer canceledAppointments;
+    @Schema(description = "Data de início do período de referência.", example = "2026-10-01")
+    private LocalDate startDate;
+
+    @Schema(description = "Data de término do período de referência.", example = "2026-10-31")
+    private LocalDate endDate;
+
+    @Schema(description = "Indicadores-chave de desempenho para o período selecionado.")
+    private DashboardKpiResponseDTO kpis;
+
+    @ArraySchema(
+            arraySchema = @Schema(description = "Contagem diária de agendamentos, incluindo datas sem agendamentos."),
+            schema = @Schema(implementation = AppointmentDailySummaryResponseDTO.class)
+    )
+    private List<AppointmentDailySummaryResponseDTO> appointmentsByDay;
 
     public DashboardResponseDTO() {
     }
 
-    public DashboardResponseDTO(Integer totalAppointmentsWeek, Integer completedAppointments, Integer canceledAppointments) {
-        this.totalAppointmentsWeek = totalAppointmentsWeek;
-        this.completedAppointments = completedAppointments;
-        this.canceledAppointments = canceledAppointments;
+    public DashboardResponseDTO(LocalDate startDate, LocalDate endDate, DashboardKpiResponseDTO kpis, List<AppointmentDailySummaryResponseDTO> appointmentsByDay) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.kpis = kpis;
+        this.appointmentsByDay = appointmentsByDay;
     }
 
-    public Integer getTotalAppointmentsWeek() {
-        return totalAppointmentsWeek;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public void setTotalAppointmentsWeek(Integer totalAppointmentsWeek) {
-        this.totalAppointmentsWeek = totalAppointmentsWeek;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
-    public Integer getCompletedAppointments() {
-        return completedAppointments;
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
-    public void setCompletedAppointments(Integer completedAppointments) {
-        this.completedAppointments = completedAppointments;
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
-    public Integer getCanceledAppointments() {
-        return canceledAppointments;
+    public DashboardKpiResponseDTO getKpis() {
+        return kpis;
     }
 
-    public void setCanceledAppointments(Integer canceledAppointments) {
-        this.canceledAppointments = canceledAppointments;
+    public void setKpis(DashboardKpiResponseDTO kpis) {
+        this.kpis = kpis;
+    }
+
+    public List<AppointmentDailySummaryResponseDTO> getAppointmentsByDay() {
+        return appointmentsByDay;
+    }
+
+    public void setAppointmentsByDay(List<AppointmentDailySummaryResponseDTO> appointmentsByDay) {
+        this.appointmentsByDay = appointmentsByDay;
     }
 }

@@ -5,19 +5,19 @@ import sptech.school.nail_api.enums.OptionType;
 
 import java.math.BigDecimal;
 
-@Schema(description = "Response data for a service modality.")
+@Schema(description = "Dados de resposta para uma modalidade de serviço.")
 public class ServiceOptionResponseDTO {
 
-    @Schema(description = "Unique identifier of the service modality.", example = "10", accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "Identificador exclusivo da modalidade de serviço.", example = "10", accessMode = Schema.AccessMode.READ_ONLY)
     private Integer idNailServiceOption;
 
-    @Schema(description = "Type of service modality.", example = "APLICACAO")
+    @Schema(description = "Tipo de modalidade de serviço.", example = "APLICACAO")
     private OptionType optionType;
 
-    @Schema(description = "Price charged for this service modality.", example = "120.00", minimum = "0")
+    @Schema(description = "Preço cobrado por esta modalidade de serviço.", example = "120.00", minimum = "0")
     private BigDecimal price;
 
-    @Schema(description = "Estimated duration of the modality, in minutes.", example = "90", minimum = "1")
+    @Schema(description = "Duração estimada da modalidade, em minutos.", example = "90", minimum = "1")
     private Integer durationMinutes;
 
     public ServiceOptionResponseDTO() {

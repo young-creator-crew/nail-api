@@ -9,15 +9,15 @@ import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
 
-@Schema(description = "Request data for creating a service addon.")
+@Schema(description = "Solicitar dados para a criação de um complemento de serviço.")
 public class ServiceAddonCreateRequestDTO {
 
-    @Schema(description = "Name of the addon.", example = "Nail art", maxLength = 100, requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Nome do complemento.", example = "Nail art", maxLength = 100, requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank(message = "The addon name is required.")
     @Size(max = 100, message = "The addon name must not exceed 100 characters.")
     private String addonName;
 
-    @Schema(description = "Additional price charged for the addon.", example = "15.00", minimum = "0", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Preço adicional cobrado pelo complemento.", example = "15.00", minimum = "0", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "The additional price is required.")
     @DecimalMin(value = "0.00", message = "The additional price must be greater than or equal to zero.")
     @Digits(integer = 8, fraction = 2, message = "The additional price must have at most 8 integer digits and 2 decimal places.")
