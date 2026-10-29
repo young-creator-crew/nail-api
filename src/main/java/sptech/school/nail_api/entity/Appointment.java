@@ -1,6 +1,8 @@
 package sptech.school.nail_api.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Generated;
+import org.hibernate.generator.EventType;
 import sptech.school.nail_api.enums.AppointmentStatus;
 import sptech.school.nail_api.enums.OptionType;
 
@@ -57,9 +59,11 @@ public class Appointment {
     @Column(name = "appointment_status", nullable = false)
     private AppointmentStatus appointmentStatus = AppointmentStatus.AGENDADO;
 
+    @Generated(event = EventType.INSERT)
     @Column(name = "created_at", nullable = false, insertable = false, updatable = false)
     private LocalDateTime createdAt;
 
+    @Generated(event = {EventType.INSERT, EventType.UPDATE})
     @Column(name = "updated_at", nullable = false, insertable = false, updatable = false)
     private LocalDateTime updatedAt;
 

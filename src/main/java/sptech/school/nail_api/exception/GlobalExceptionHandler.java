@@ -6,6 +6,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import sptech.school.nail_api.dto.exception.StandardErrorResponseDTO;
+import sptech.school.nail_api.exception.appointment.AppointmentConflictException;
+import sptech.school.nail_api.exception.appointment.AppointmentNotFoundException;
+import sptech.school.nail_api.exception.appointment.AppointmentValidationException;
 import sptech.school.nail_api.exception.auth.InvalidCredentialsException;
 import sptech.school.nail_api.exception.database.DataBaseAccessException;
 import sptech.school.nail_api.exception.user.UserAlreadyExistsException;
@@ -78,7 +81,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<StandardErrorResponseDTO> handleValidationErrors(MethodArgumentNotValidException exception, HttpServletRequest request) {
+    public ResponseEntity<StandardErrorResponseDTO> handleMethodArgumentNotValid(MethodArgumentNotValidException exception, HttpServletRequest request) {
 
         StandardErrorResponseDTO error = new StandardErrorResponseDTO(
                 LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
@@ -89,6 +92,51 @@ public class GlobalExceptionHandler {
         );
 
         return ResponseEntity.status(400).body(error);
+    }
+
+    @ExceptionHandler(AppointmentNotFoundException.class)
+    public ResponseEntity<StandardErrorResponseDTO> handleAppointmentNotFound(AppointmentNotFoundException exception, HttpServletRequest request) {
+        exception.printStackTrace();
+
+        StandardErrorResponseDTO error = new StandardErrorResponseDTO(
+                LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
+                404,
+                "Not Found",
+                "Appointment not found in the database",
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(404).body(error);
+    }
+
+    @ExceptionHandler(AppointmentValidationException.class)
+    public ResponseEntity<StandardErrorResponseDTO> handleAppointmentValidation(AppointmentValidationException exception, HttpServletRequest request) {
+        exception.printStackTrace();
+
+        StandardErrorResponseDTO error = new StandardErrorResponseDTO(
+                LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
+                400,
+                "Bad Request",
+                "Invalid data, check the fields",
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(400).body(error);
+    }
+
+    @ExceptionHandler(AppointmentConflictException.class)
+    public ResponseEntity<StandardErrorResponseDTO> handleAppointmentConflict(AppointmentConflictException exception, HttpServletRequest request) {
+        exception.printStackTrace();
+
+        StandardErrorResponseDTO error = new StandardErrorResponseDTO(
+                LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
+                409,
+                "Conflict",
+                "Appointment with this data already exists in the database",
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(409).body(error);
     }
 
     public ResponseEntity<StandardErrorResponseDTO> handleGenericException(Exception exception, HttpServletRequest request) {
@@ -104,5 +152,4 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.status(500).body(error);
     }
-
 }
