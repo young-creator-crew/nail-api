@@ -106,7 +106,7 @@ public class ServiceController {
         return ResponseEntity.ok(response);
     }
 
-    @PatchMapping("/{id}/deactivate")
+    @DeleteMapping("/{id}/deactivate")
     @Operation(summary = "Desativar serviço", description = "Desativa um serviço sem excluí-lo fisicamente, preservando os registros relacionados.")
     @ApiResponses({
             @ApiResponse(responseCode = "204", description = "Serviço desativado com sucesso.", content = @Content),
