@@ -1,39 +1,16 @@
 package sptech.school.nail_api.repository;
 
-import org.springframework.dao.DataAccessException;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
-import sptech.school.nail_api.exception.DataBaseAccessException;
-import sptech.school.nail_api.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import sptech.school.nail_api.entity.User;
 
-@Repository
-public class UserRepository {
+import java.util.Optional;
 
-    private final JdbcTemplate jdbcTemplate;
+public interface UserRepository extends JpaRepository<User, Integer> {
 
-    public UserRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+    Optional<User> findByEmail(String email);
 
-    public User findByEmail(String email) {
-        String sql = "SELECT * FROM Users WHERE email = ?";
-        try {
-            return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), email);
-        } catch (EmptyResultDataAccessException e) {
-            return null;
-        } catch (DataAccessException e) {
-            throw new DataBaseAccessException("Error retrieving user by email: " + email, e);
-        }
-    }
+    boolean existsByEmail(String email);
 
-    public void save(User user) {
-        String sql = "INSERT INTO Users (email, user_password, username) VALUES (?, ?, ?)";
-        try {
-            jdbcTemplate.update(sql, user.getEmail(), user.getUserPassword(), user.getUsername());
-        } catch (DataAccessException e) {
-            throw new DataBaseAccessException("Error registering the user", e);
-        }
-    }
+    boolean existsByEmailAndIdUserNot(String email, Integer idUser);
+
 }
