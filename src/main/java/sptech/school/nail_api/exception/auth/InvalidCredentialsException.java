@@ -1,7 +1,7 @@
-package sptech.school.nail_api.exception;
+package sptech.school.nail_api.exception.auth;
 
 public class InvalidCredentialsException extends RuntimeException {
     public InvalidCredentialsException() {
-      super("Invalid password!");
+      super("Invalid email or password!");
     }
 }
