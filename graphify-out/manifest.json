@@ -1,0 +1,458 @@
+{
+  "mvnw": {
+    "mtime": 1794777402.9458017,
+    "seen": 1794795273.3940399,
+    "ast_hash": "ab50dd89da7da2346b28003352eeeeeb",
+    "semantic_hash": "ab50dd89da7da2346b28003352eeeeeb"
+  },
+  "pom.xml": {
+    "mtime": 1794780428.1021588,
+    "seen": 1794795273.394047,
+    "ast_hash": "55698745d25cf659a962ccc32c9660c6",
+    "semantic_hash": "55698745d25cf659a962ccc32c9660c6"
+  },
+  "src/main/java/sptech/school/nail_api/NailApiApplication.java": {
+    "mtime": 1794777402.94781,
+    "seen": 1794795273.39405,
+    "ast_hash": "65c91ed4b98ecafad2909644057b53e1",
+    "semantic_hash": "65c91ed4b98ecafad2909644057b53e1"
+  },
+  "src/main/java/sptech/school/nail_api/config/CorsConfig.java": {
+    "mtime": 1794780428.1031554,
+    "seen": 1794795273.394051,
+    "ast_hash": "bb169f89f81af9196a98440028269fca",
+    "semantic_hash": "bb169f89f81af9196a98440028269fca"
+  },
+  "src/main/java/sptech/school/nail_api/config/FotoConfig.java": {
+    "mtime": 1794780428.1041594,
+    "seen": 1794795273.3940525,
+    "ast_hash": "b7d98d8a689c1beccf3450796de19bd6",
+    "semantic_hash": "b7d98d8a689c1beccf3450796de19bd6"
+  },
+  "src/main/java/sptech/school/nail_api/config/OpenApiConfig.java": {
+    "mtime": 1794780428.1052163,
+    "seen": 1794795273.3940537,
+    "ast_hash": "dbc36ce454f6ac9f7569f38afec8adfe",
+    "semantic_hash": "dbc36ce454f6ac9f7569f38afec8adfe"
+  },
+  "src/main/java/sptech/school/nail_api/config/PasswordEncoderConfig.java": {
+    "mtime": 1794780428.1052163,
+    "seen": 1794795273.394055,
+    "ast_hash": "d9f2c0621645be5cc2b035574d77de8f",
+    "semantic_hash": "d9f2c0621645be5cc2b035574d77de8f"
+  },
+  "src/main/java/sptech/school/nail_api/controller/AppointmentController.java": {
+    "mtime": 1794780428.1061554,
+    "seen": 1794795273.3940558,
+    "ast_hash": "7afc788607347bee6b64a77c590db52a",
+    "semantic_hash": "7afc788607347bee6b64a77c590db52a"
+  },
+  "src/main/java/sptech/school/nail_api/controller/AuthController.java": {
+    "mtime": 1794780428.1071737,
+    "seen": 1794795273.3940573,
+    "ast_hash": "20477d60241027ea58bc319478f10bf2",
+    "semantic_hash": "20477d60241027ea58bc319478f10bf2"
+  },
+  "src/main/java/sptech/school/nail_api/controller/DashboardController.java": {
+    "mtime": 1794780428.1071737,
+    "seen": 1794795273.394058,
+    "ast_hash": "57f5e1d5fca30a2b40dee1cbdff793ad",
+    "semantic_hash": "57f5e1d5fca30a2b40dee1cbdff793ad"
+  },
+  "src/main/java/sptech/school/nail_api/controller/ServiceController.java": {
+    "mtime": 1794780428.108155,
+    "seen": 1794795273.394059,
+    "ast_hash": "1caea1c1f0fa7187736860e44a2e1dbb",
+    "semantic_hash": "1caea1c1f0fa7187736860e44a2e1dbb"
+  },
+  "src/main/java/sptech/school/nail_api/controller/UserController.java": {
+    "mtime": 1794791651.7637541,
+    "seen": 1794795273.3940606,
+    "ast_hash": "e15797ac4d4339ebf3c0853ef357b57e",
+    "semantic_hash": "e15797ac4d4339ebf3c0853ef357b57e"
+  },
+  "src/main/java/sptech/school/nail_api/dto/appointment/AppointmentRequestDTO.java": {
+    "mtime": 1794780428.109153,
+    "seen": 1794795273.3940613,
+    "ast_hash": "21692de8f2b155c7296e54332dff7366",
+    "semantic_hash": "21692de8f2b155c7296e54332dff7366"
+  },
+  "src/main/java/sptech/school/nail_api/dto/appointment/AppointmentResponseDTO.java": {
+    "mtime": 1794780428.110153,
+    "seen": 1794795273.3940623,
+    "ast_hash": "8789d9b033a35faed967613f8b705ea5",
+    "semantic_hash": "8789d9b033a35faed967613f8b705ea5"
+  },
+  "src/main/java/sptech/school/nail_api/dto/appointment/AppointmentStatusUpdateDTO.java": {
+    "mtime": 1794780428.110153,
+    "seen": 1794795273.3940635,
+    "ast_hash": "f3ed7371b94b931b3b13173f464dfe70",
+    "semantic_hash": "f3ed7371b94b931b3b13173f464dfe70"
+  },
+  "src/main/java/sptech/school/nail_api/dto/appointment/AvailableSlotResponseDTO.java": {
+    "mtime": 1794780428.1111546,
+    "seen": 1794795273.3940644,
+    "ast_hash": "0b4e0372b416fd2bea7fbe0b8ff1af21",
+    "semantic_hash": "0b4e0372b416fd2bea7fbe0b8ff1af21"
+  },
+  "src/main/java/sptech/school/nail_api/dto/auth/LoginRequestDTO.java": {
+    "mtime": 1794780428.112155,
+    "seen": 1794795273.3940651,
+    "ast_hash": "4b09c771511fb14318589b509cbcd733",
+    "semantic_hash": "4b09c771511fb14318589b509cbcd733"
+  },
+  "src/main/java/sptech/school/nail_api/dto/auth/RegisterRequestDTO.java": {
+    "mtime": 1794780428.112155,
+    "seen": 1794795273.394066,
+    "ast_hash": "563be7053b190f7f778fd6513454a20b",
+    "semantic_hash": "563be7053b190f7f778fd6513454a20b"
+  },
+  "src/main/java/sptech/school/nail_api/dto/dashboard/AppointmentDailySummaryResponseDTO.java": {
+    "mtime": 1794780428.114157,
+    "seen": 1794795273.3940673,
+    "ast_hash": "caf4983136ce4f5c8c03620fda18d1d6",
+    "semantic_hash": "caf4983136ce4f5c8c03620fda18d1d6"
+  },
+  "src/main/java/sptech/school/nail_api/dto/dashboard/DashboardKpiResponseDTO.java": {
+    "mtime": 1794780428.1151564,
+    "seen": 1794795273.3940682,
+    "ast_hash": "a338118092b5f4046d2a5a3e1b5a11ea",
+    "semantic_hash": "a338118092b5f4046d2a5a3e1b5a11ea"
+  },
+  "src/main/java/sptech/school/nail_api/dto/dashboard/DashboardResponseDTO.java": {
+    "mtime": 1794780428.1151564,
+    "seen": 1794795273.394069,
+    "ast_hash": "cd0a44eab64457ff5b9fa98e545ea927",
+    "semantic_hash": "cd0a44eab64457ff5b9fa98e545ea927"
+  },
+  "src/main/java/sptech/school/nail_api/dto/exception/StandardErrorResponseDTO.java": {
+    "mtime": 1794780428.1161559,
+    "seen": 1794795273.3940704,
+    "ast_hash": "88bb37890a02f65a3615d52a23844061",
+    "semantic_hash": "88bb37890a02f65a3615d52a23844061"
+  },
+  "src/main/java/sptech/school/nail_api/dto/service/create/ServiceAddonCreateRequestDTO.java": {
+    "mtime": 1794780428.1171546,
+    "seen": 1794795273.3940716,
+    "ast_hash": "e85e72d364c6aa43eb1926abaa642c46",
+    "semantic_hash": "e85e72d364c6aa43eb1926abaa642c46"
+  },
+  "src/main/java/sptech/school/nail_api/dto/service/create/ServiceCreateRequestDTO.java": {
+    "mtime": 1794780428.1181564,
+    "seen": 1794795273.3940725,
+    "ast_hash": "558611dd8ad39f09843eb224ead96da7",
+    "semantic_hash": "558611dd8ad39f09843eb224ead96da7"
+  },
+  "src/main/java/sptech/school/nail_api/dto/service/create/ServiceOptionCreateRequestDTO.java": {
+    "mtime": 1794780428.1181564,
+    "seen": 1794795273.394074,
+    "ast_hash": "3a12219668a50194a570b8926e4c7320",
+    "semantic_hash": "3a12219668a50194a570b8926e4c7320"
+  },
+  "src/main/java/sptech/school/nail_api/dto/service/response/ServiceAddonResponseDTO.java": {
+    "mtime": 1794780428.1191552,
+    "seen": 1794795273.394075,
+    "ast_hash": "9d824472f55fc20098631984301fcdf5",
+    "semantic_hash": "9d824472f55fc20098631984301fcdf5"
+  },
+  "src/main/java/sptech/school/nail_api/dto/service/response/ServiceOptionResponseDTO.java": {
+    "mtime": 1794780428.1201556,
+    "seen": 1794795273.3940759,
+    "ast_hash": "02b2c163c651d5198c4c9a9f33112fca",
+    "semantic_hash": "02b2c163c651d5198c4c9a9f33112fca"
+  },
+  "src/main/java/sptech/school/nail_api/dto/service/response/ServiceResponseDTO.java": {
+    "mtime": 1794780428.1201556,
+    "seen": 1794795273.3940768,
+    "ast_hash": "3e35b42c216040909164e26f51044659",
+    "semantic_hash": "3e35b42c216040909164e26f51044659"
+  },
+  "src/main/java/sptech/school/nail_api/dto/service/response/ServiceSummaryResponseDTO.java": {
+    "mtime": 1794780428.1211555,
+    "seen": 1794795273.394078,
+    "ast_hash": "5913aa6cdd3deec5cb0a8ba4c342d15d",
+    "semantic_hash": "5913aa6cdd3deec5cb0a8ba4c342d15d"
+  },
+  "src/main/java/sptech/school/nail_api/dto/service/update/ServiceAddonUpdateRequestDTO.java": {
+    "mtime": 1794780428.1211555,
+    "seen": 1794795273.394079,
+    "ast_hash": "f4f177410f6704b4f6adfc8a5f1aea9d",
+    "semantic_hash": "f4f177410f6704b4f6adfc8a5f1aea9d"
+  },
+  "src/main/java/sptech/school/nail_api/dto/service/update/ServiceOptionUpdateRequestDTO.java": {
+    "mtime": 1794780428.1221542,
+    "seen": 1794795273.39408,
+    "ast_hash": "88fe91552969ec2bdf9ec58c89713bd4",
+    "semantic_hash": "88fe91552969ec2bdf9ec58c89713bd4"
+  },
+  "src/main/java/sptech/school/nail_api/dto/service/update/ServiceUpdateRequestDTO.java": {
+    "mtime": 1794780428.1221542,
+    "seen": 1794795273.394081,
+    "ast_hash": "2acc2db3e21c0e5813bd8e0f05eab314",
+    "semantic_hash": "2acc2db3e21c0e5813bd8e0f05eab314"
+  },
+  "src/main/java/sptech/school/nail_api/dto/user/UserResponseDTO.java": {
+    "mtime": 1794780428.1231549,
+    "seen": 1794795273.394082,
+    "ast_hash": "0191e303a7c70b2084923b14440fe0ff",
+    "semantic_hash": "0191e303a7c70b2084923b14440fe0ff"
+  },
+  "src/main/java/sptech/school/nail_api/dto/user/UserUpdatePasswordRequestDTO.java": {
+    "mtime": 1794785831.6773458,
+    "seen": 1794795273.394083,
+    "ast_hash": "349314fd52d92c078c8e16f07de2068c",
+    "semantic_hash": "349314fd52d92c078c8e16f07de2068c"
+  },
+  "src/main/java/sptech/school/nail_api/dto/user/UserUpdateRequestDTO.java": {
+    "mtime": 1794782143.572068,
+    "seen": 1794795273.3940842,
+    "ast_hash": "3ddbc6f131d7140f00b025135d2decdf",
+    "semantic_hash": "3ddbc6f131d7140f00b025135d2decdf"
+  },
+  "src/main/java/sptech/school/nail_api/entity/Appointment.java": {
+    "mtime": 1794780428.124155,
+    "seen": 1794795273.3940852,
+    "ast_hash": "29c4f107b6d099582fabdf8a12b14d8e",
+    "semantic_hash": "29c4f107b6d099582fabdf8a12b14d8e"
+  },
+  "src/main/java/sptech/school/nail_api/entity/NailService.java": {
+    "mtime": 1794780428.1251552,
+    "seen": 1794795273.394086,
+    "ast_hash": "26d1b5c134ec6e7fcb2445819629da8a",
+    "semantic_hash": "26d1b5c134ec6e7fcb2445819629da8a"
+  },
+  "src/main/java/sptech/school/nail_api/entity/NailServiceAddon.java": {
+    "mtime": 1794780428.1251552,
+    "seen": 1794795273.3940868,
+    "ast_hash": "23a655c7cf019f43bf50f4cc05dde6f1",
+    "semantic_hash": "23a655c7cf019f43bf50f4cc05dde6f1"
+  },
+  "src/main/java/sptech/school/nail_api/entity/NailServiceOption.java": {
+    "mtime": 1794780428.1261551,
+    "seen": 1794795273.394088,
+    "ast_hash": "b6d47c0026bdb4de27d0eb26bf7b9f12",
+    "semantic_hash": "b6d47c0026bdb4de27d0eb26bf7b9f12"
+  },
+  "src/main/java/sptech/school/nail_api/entity/User.java": {
+    "mtime": 1794780428.1261551,
+    "seen": 1794795273.394089,
+    "ast_hash": "e12d44d9813adbff911ceea3fa0a0af8",
+    "semantic_hash": "e12d44d9813adbff911ceea3fa0a0af8"
+  },
+  "src/main/java/sptech/school/nail_api/enums/AppointmentStatus.java": {
+    "mtime": 1794780428.1271546,
+    "seen": 1794795273.39409,
+    "ast_hash": "47b5b5fc0e743326aef7b4990de9059c",
+    "semantic_hash": "47b5b5fc0e743326aef7b4990de9059c"
+  },
+  "src/main/java/sptech/school/nail_api/enums/OptionType.java": {
+    "mtime": 1794780428.1271546,
+    "seen": 1794795273.3940907,
+    "ast_hash": "82f39c455131e3f17bc61c6dd2db044b",
+    "semantic_hash": "82f39c455131e3f17bc61c6dd2db044b"
+  },
+  "src/main/java/sptech/school/nail_api/enums/UserType.java": {
+    "mtime": 1794780428.1281545,
+    "seen": 1794795273.3940918,
+    "ast_hash": "2e5cffa1224e95a3e8a8bb40dc2f66a4",
+    "semantic_hash": "2e5cffa1224e95a3e8a8bb40dc2f66a4"
+  },
+  "src/main/java/sptech/school/nail_api/exception/GlobalExceptionHandler.java": {
+    "mtime": 1794791237.4475298,
+    "seen": 1794795273.3940933,
+    "ast_hash": "9fda0079bd5e9fa326d2af33803d0161",
+    "semantic_hash": "9fda0079bd5e9fa326d2af33803d0161"
+  },
+  "src/main/java/sptech/school/nail_api/exception/appointment/AppointmentConflictException.java": {
+    "mtime": 1794780428.1301723,
+    "seen": 1794795273.394094,
+    "ast_hash": "d60fbbfd843a2441fa47afa434a2d3d6",
+    "semantic_hash": "d60fbbfd843a2441fa47afa434a2d3d6"
+  },
+  "src/main/java/sptech/school/nail_api/exception/appointment/AppointmentNotFoundException.java": {
+    "mtime": 1794780428.1301723,
+    "seen": 1794795273.3940952,
+    "ast_hash": "54748ce06da871a2ca60450a4b8b2c57",
+    "semantic_hash": "54748ce06da871a2ca60450a4b8b2c57"
+  },
+  "src/main/java/sptech/school/nail_api/exception/appointment/AppointmentValidationException.java": {
+    "mtime": 1794780428.1301723,
+    "seen": 1794795273.3940961,
+    "ast_hash": "558f8b2cf6a927cfe6f580147eaa53c0",
+    "semantic_hash": "558f8b2cf6a927cfe6f580147eaa53c0"
+  },
+  "src/main/java/sptech/school/nail_api/exception/auth/InvalidCredentialsException.java": {
+    "mtime": 1794780428.131155,
+    "seen": 1794795273.394097,
+    "ast_hash": "ad05c0c9a88e5876ea5888c5e6f79482",
+    "semantic_hash": "ad05c0c9a88e5876ea5888c5e6f79482"
+  },
+  "src/main/java/sptech/school/nail_api/exception/database/DataBaseAccessException.java": {
+    "mtime": 1794780428.1321557,
+    "seen": 1794795273.3940978,
+    "ast_hash": "e5a87d7616164a14a77f19ee411d410f",
+    "semantic_hash": "e5a87d7616164a14a77f19ee411d410f"
+  },
+  "src/main/java/sptech/school/nail_api/exception/service/ServiceNotFoundException.java": {
+    "mtime": 1794780428.1321557,
+    "seen": 1794795273.394099,
+    "ast_hash": "7baf275ee431e7ba78cb7e8982bacd12",
+    "semantic_hash": "7baf275ee431e7ba78cb7e8982bacd12"
+  },
+  "src/main/java/sptech/school/nail_api/exception/user/InvalidUserStatusException.java": {
+    "mtime": 1794791569.0650365,
+    "seen": 1794795273.3941,
+    "ast_hash": "55dbabc7d35eeddebf8efda0b6e7a990",
+    "semantic_hash": "55dbabc7d35eeddebf8efda0b6e7a990"
+  },
+  "src/main/java/sptech/school/nail_api/exception/user/UserAlreadyExistsException.java": {
+    "mtime": 1794780428.1331553,
+    "seen": 1794795273.394101,
+    "ast_hash": "c24aff34f7681c8f40a552aa54c48cf0",
+    "semantic_hash": "c24aff34f7681c8f40a552aa54c48cf0"
+  },
+  "src/main/java/sptech/school/nail_api/exception/user/UserNotFoundException.java": {
+    "mtime": 1794780428.1331553,
+    "seen": 1794795273.394102,
+    "ast_hash": "98ee511273e88bdd68d3c4e3e3364709",
+    "semantic_hash": "98ee511273e88bdd68d3c4e3e3364709"
+  },
+  "src/main/java/sptech/school/nail_api/mapper/AppointmentMapper.java": {
+    "mtime": 1794780428.134156,
+    "seen": 1794795273.3941028,
+    "ast_hash": "23f5a496526e2ae37e2b5bacd7917474",
+    "semantic_hash": "23f5a496526e2ae37e2b5bacd7917474"
+  },
+  "src/main/java/sptech/school/nail_api/mapper/DashboardMapper.java": {
+    "mtime": 1794780428.135157,
+    "seen": 1794795273.3941038,
+    "ast_hash": "e1d3c719705a08f3ec2be18385580486",
+    "semantic_hash": "e1d3c719705a08f3ec2be18385580486"
+  },
+  "src/main/java/sptech/school/nail_api/mapper/ServiceMapper.java": {
+    "mtime": 1794780428.135157,
+    "seen": 1794795273.3941047,
+    "ast_hash": "844cd0cb36526fe5021809e3a3e34245",
+    "semantic_hash": "844cd0cb36526fe5021809e3a3e34245"
+  },
+  "src/main/java/sptech/school/nail_api/mapper/UserMapper.java": {
+    "mtime": 1794780428.1361563,
+    "seen": 1794795273.394106,
+    "ast_hash": "4f67249e5f04cf23d55c2f20e9840f46",
+    "semantic_hash": "4f67249e5f04cf23d55c2f20e9840f46"
+  },
+  "src/main/java/sptech/school/nail_api/repository/AppointmentRepository.java": {
+    "mtime": 1794780428.137157,
+    "seen": 1794795273.3941069,
+    "ast_hash": "90a6b8948fe2815b25e1f71230a7281c",
+    "semantic_hash": "90a6b8948fe2815b25e1f71230a7281c"
+  },
+  "src/main/java/sptech/school/nail_api/repository/DashboardRepository.java": {
+    "mtime": 1794780428.137157,
+    "seen": 1794795273.3941078,
+    "ast_hash": "cc8b8e162f97c9f783eec9ca3db40b5d",
+    "semantic_hash": "cc8b8e162f97c9f783eec9ca3db40b5d"
+  },
+  "src/main/java/sptech/school/nail_api/repository/NailServiceAddonRepository.java": {
+    "mtime": 1794780428.1381557,
+    "seen": 1794795273.394109,
+    "ast_hash": "50a86af1e0af6dff694ee217f0e5b6e3",
+    "semantic_hash": "50a86af1e0af6dff694ee217f0e5b6e3"
+  },
+  "src/main/java/sptech/school/nail_api/repository/NailServiceOptionRepository.java": {
+    "mtime": 1794780428.1381557,
+    "seen": 1794795273.3941097,
+    "ast_hash": "51b3aaf5be89e09b81556db8f7f28483",
+    "semantic_hash": "51b3aaf5be89e09b81556db8f7f28483"
+  },
+  "src/main/java/sptech/school/nail_api/repository/NailServiceRepository.java": {
+    "mtime": 1794780428.1381557,
+    "seen": 1794795273.3941107,
+    "ast_hash": "f8e46906b858a132dcbb1d1f85da2bb4",
+    "semantic_hash": "f8e46906b858a132dcbb1d1f85da2bb4"
+  },
+  "src/main/java/sptech/school/nail_api/repository/UserRepository.java": {
+    "mtime": 1794790725.3998132,
+    "seen": 1794795273.394112,
+    "ast_hash": "ba61d9dafb522d427d45bfe2a9b9291e",
+    "semantic_hash": "ba61d9dafb522d427d45bfe2a9b9291e"
+  },
+  "src/main/java/sptech/school/nail_api/service/AppointmentService.java": {
+    "mtime": 1794780428.1401553,
+    "seen": 1794795273.394113,
+    "ast_hash": "1c38172eabeb247f4e2a8ead01ee04d8",
+    "semantic_hash": "1c38172eabeb247f4e2a8ead01ee04d8"
+  },
+  "src/main/java/sptech/school/nail_api/service/AuthService.java": {
+    "mtime": 1794780428.1401553,
+    "seen": 1794795273.394114,
+    "ast_hash": "5c7c185609dc344b056d6b9a4d95af1e",
+    "semantic_hash": "5c7c185609dc344b056d6b9a4d95af1e"
+  },
+  "src/main/java/sptech/school/nail_api/service/DashboardService.java": {
+    "mtime": 1794780428.1401553,
+    "seen": 1794795273.394115,
+    "ast_hash": "66e2521504b7b782823e6d014a1fb33c",
+    "semantic_hash": "66e2521504b7b782823e6d014a1fb33c"
+  },
+  "src/main/java/sptech/school/nail_api/service/FileStorageService.java": {
+    "mtime": 1794780428.1411567,
+    "seen": 1794795273.3941162,
+    "ast_hash": "20aae2ee2de3c406068edda10a558f60",
+    "semantic_hash": "20aae2ee2de3c406068edda10a558f60"
+  },
+  "src/main/java/sptech/school/nail_api/service/ServiceService.java": {
+    "mtime": 1794780428.1411567,
+    "seen": 1794795273.394117,
+    "ast_hash": "b728c857a26eff4a0bc0d69096ba06df",
+    "semantic_hash": "b728c857a26eff4a0bc0d69096ba06df"
+  },
+  "src/main/java/sptech/school/nail_api/service/UserService.java": {
+    "mtime": 1794791118.2322817,
+    "seen": 1794795273.394118,
+    "ast_hash": "8b4b61bb4423a0b02c5b4123c6aa7a6d",
+    "semantic_hash": "8b4b61bb4423a0b02c5b4123c6aa7a6d"
+  },
+  "src/test/java/sptech/school/nail_api/NailApiApplicationTests.java": {
+    "mtime": 1794777402.9886074,
+    "seen": 1794795273.3941193,
+    "ast_hash": "73030e98e850c3f2dabb2f303d1499dd",
+    "semantic_hash": "73030e98e850c3f2dabb2f303d1499dd"
+  },
+  ".github/copilot-instructions.md": {
+    "mtime": 1794794324.382965,
+    "seen": 1794796120.0161436,
+    "ast_hash": "3d461efc4ab1e95eddca574975186fb8",
+    "semantic_hash": "3d461efc4ab1e95eddca574975186fb8"
+  },
+  "AGENTS.md": {
+    "mtime": 1794794195.9170177,
+    "seen": 1794796120.0161452,
+    "ast_hash": "a7fc14d78acc257e4d89bde4905ba82e",
+    "semantic_hash": "a7fc14d78acc257e4d89bde4905ba82e"
+  },
+  "HELP.md": {
+    "mtime": 1794780428.1001568,
+    "seen": 1794796120.0161462,
+    "ast_hash": "4cbe5b35d15c379ad176e41eb8e20a67",
+    "semantic_hash": "4cbe5b35d15c379ad176e41eb8e20a67"
+  },
+  "README.md": {
+    "mtime": 1794793540.1538856,
+    "seen": 1794796120.0161471,
+    "ast_hash": "51313c24db79ad6c6d87abb1b0913f51",
+    "semantic_hash": "51313c24db79ad6c6d87abb1b0913f51"
+  },
+  "uploads/fotos/067611f0-c610-48a6-84aa-e488264042ef.webp": {
+    "mtime": 1794780428.1441534,
+    "seen": 1794796120.0161483,
+    "ast_hash": "a58f786e1e7c790b5325dd3cf3ecb361",
+    "semantic_hash": "a58f786e1e7c790b5325dd3cf3ecb361"
+  },
+  "uploads/fotos/235eabc2-4f5b-406e-93cf-19efddbf75ce.webp": {
+    "mtime": 1794780428.1441534,
+    "seen": 1794796120.016149,
+    "ast_hash": "a58f786e1e7c790b5325dd3cf3ecb361",
+    "semantic_hash": "a58f786e1e7c790b5325dd3cf3ecb361"
+  }
+}
