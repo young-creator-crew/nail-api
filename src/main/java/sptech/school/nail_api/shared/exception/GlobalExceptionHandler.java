@@ -1,0 +1,183 @@
+package sptech.school.nail_api.shared.exception;
+
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import sptech.school.nail_api.shared.dto.StandardErrorResponseDTO;
+import sptech.school.nail_api.appointment.exception.AppointmentConflictException;
+import sptech.school.nail_api.appointment.exception.AppointmentNotFoundException;
+import sptech.school.nail_api.appointment.exception.AppointmentValidationException;
+import sptech.school.nail_api.auth.exception.InvalidCredentialsException;
+import sptech.school.nail_api.shared.exception.DataBaseAccessException;
+import sptech.school.nail_api.user.exception.InvalidUserStatusException;
+import sptech.school.nail_api.user.exception.UserAlreadyExistsException;
+import sptech.school.nail_api.user.exception.UserNotFoundException;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(DataBaseAccessException.class)
+    public ResponseEntity<StandardErrorResponseDTO> handleDataBaseAccess(DataBaseAccessException exception, HttpServletRequest request) {
+        exception.printStackTrace();
+
+        StandardErrorResponseDTO error = new StandardErrorResponseDTO(
+                LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
+                500,
+                "Internal Server Error",
+                "Internal error communicating with the database",
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(500).body(error);
+    }
+
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<StandardErrorResponseDTO> handleInvalidCredentials(InvalidCredentialsException exception, HttpServletRequest request) {
+        exception.printStackTrace();
+
+        StandardErrorResponseDTO error = new StandardErrorResponseDTO(
+                LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
+                401,
+                "Unauthorized",
+                "Request with invalid credentials",
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(401).body(error);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<StandardErrorResponseDTO> handleIllegalArgumentException(IllegalArgumentException exception, HttpServletRequest request){
+        StandardErrorResponseDTO error = new StandardErrorResponseDTO(
+                LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
+                400,
+                "Bad Request",
+                "The new password must be different from the current password.",
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(400).body(error);
+    }
+
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public ResponseEntity<StandardErrorResponseDTO> handleUserAlreadyExists(UserAlreadyExistsException exception, HttpServletRequest request) {
+        exception.printStackTrace();
+
+        StandardErrorResponseDTO error = new StandardErrorResponseDTO(
+                LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
+                409,
+                "Conflict",
+                "User with this credentials already exists in the database",
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(409).body(error);
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<StandardErrorResponseDTO> handleUserNotFound(UserNotFoundException exception, HttpServletRequest request) {
+        exception.printStackTrace();
+
+        StandardErrorResponseDTO error = new StandardErrorResponseDTO(
+                LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
+                404,
+                "Not Found",
+                "User not found in the database",
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(404).body(error);
+    }
+
+    @ExceptionHandler(InvalidUserStatusException.class)
+    public ResponseEntity<StandardErrorResponseDTO> handleInvalidUserStatusException(InvalidCredentialsException exception, HttpServletRequest request){
+
+        StandardErrorResponseDTO error = new StandardErrorResponseDTO(
+                LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
+                422,
+                "Unprocessable Entity",
+                "User unavailable",
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(422).body(error);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<StandardErrorResponseDTO> handleMethodArgumentNotValid(MethodArgumentNotValidException exception, HttpServletRequest request) {
+
+        StandardErrorResponseDTO error = new StandardErrorResponseDTO(
+                LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
+                400,
+                "Bad Request",
+                "Invalid data, check the fields",
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(400).body(error);
+    }
+
+    @ExceptionHandler(AppointmentNotFoundException.class)
+    public ResponseEntity<StandardErrorResponseDTO> handleAppointmentNotFound(AppointmentNotFoundException exception, HttpServletRequest request) {
+        exception.printStackTrace();
+
+        StandardErrorResponseDTO error = new StandardErrorResponseDTO(
+                LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
+                404,
+                "Not Found",
+                "Appointment not found in the database",
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(404).body(error);
+    }
+
+    @ExceptionHandler(AppointmentValidationException.class)
+    public ResponseEntity<StandardErrorResponseDTO> handleAppointmentValidation(AppointmentValidationException exception, HttpServletRequest request) {
+        exception.printStackTrace();
+
+        StandardErrorResponseDTO error = new StandardErrorResponseDTO(
+                LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
+                400,
+                "Bad Request",
+                "Invalid data, check the fields",
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(400).body(error);
+    }
+
+    @ExceptionHandler(AppointmentConflictException.class)
+    public ResponseEntity<StandardErrorResponseDTO> handleAppointmentConflict(AppointmentConflictException exception, HttpServletRequest request) {
+        exception.printStackTrace();
+
+        StandardErrorResponseDTO error = new StandardErrorResponseDTO(
+                LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
+                409,
+                "Conflict",
+                "Appointment with this data already exists in the database",
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(409).body(error);
+    }
+
+    public ResponseEntity<StandardErrorResponseDTO> handleGenericException(Exception exception, HttpServletRequest request) {
+        exception.printStackTrace();
+
+        StandardErrorResponseDTO error = new StandardErrorResponseDTO(
+                LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
+                500,
+                "Internal Server Error",
+                "An unexpected error occurred on the server",
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(500).body(error);
+    }
+}
