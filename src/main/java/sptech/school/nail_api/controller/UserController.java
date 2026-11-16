@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import sptech.school.nail_api.dto.user.UserUpdatePasswordRequestDTO;
 import sptech.school.nail_api.dto.user.UserUpdateRequestDTO;
 import sptech.school.nail_api.dto.user.UserResponseDTO;
 import sptech.school.nail_api.service.UserService;
@@ -39,8 +40,8 @@ public class UserController {
         return ResponseEntity.status(200).body(userService.get(id));
     }
 
-    @PutMapping("/{id}")
-    @Operation(summary = "Atualizar usuário", description = "Atualiza o nome, o e-mail e o telefone de um usuário ativo.")
+    @PatchMapping("/{id}")
+    @Operation(summary = "Atualizar usuário", description = "Atualiza o nome e o telefone de um usuário ativo.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Usuário atualizado.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDTO.class))),
             @ApiResponse(responseCode = "400", description = "Dados inválidos ou falha na validação.", content = @Content),
@@ -52,6 +53,24 @@ public class UserController {
             @Valid @RequestBody UserUpdateRequestDTO request
     ) {
         return ResponseEntity.ok(userService.update(request, id));
+    }
+
+    @PatchMapping("/password/{id}")
+    @Operation(summary = "Alterar a senha de um usuário", description = "Altera a senha de um usuário logado")
+    @ApiResponses({
+            @ApiResponse(responseCode = "204", description = "Senha alterada com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Nova senha invalida"),
+            @ApiResponse(responseCode = "401", description = "Senha atual incorreta"),
+            @ApiResponse(responseCode = "422", description = "Usuário invalido ou indisponível para alteração")
+
+    })
+    public ResponseEntity<Void> updatePasswordUser (
+            @Parameter(description = "Identificador do usuário.", example = "1", required = true)
+            @Valid @RequestBody UserUpdatePasswordRequestDTO request,
+            @PathVariable Integer id
+    ){
+        userService.updatePassword(request, id);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")

@@ -11,6 +11,7 @@ import sptech.school.nail_api.exception.appointment.AppointmentNotFoundException
 import sptech.school.nail_api.exception.appointment.AppointmentValidationException;
 import sptech.school.nail_api.exception.auth.InvalidCredentialsException;
 import sptech.school.nail_api.exception.database.DataBaseAccessException;
+import sptech.school.nail_api.exception.user.InvalidUserStatusException;
 import sptech.school.nail_api.exception.user.UserAlreadyExistsException;
 import sptech.school.nail_api.exception.user.UserNotFoundException;
 
@@ -50,6 +51,19 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(401).body(error);
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<StandardErrorResponseDTO> handleIllegalArgumentException(IllegalArgumentException exception, HttpServletRequest request){
+        StandardErrorResponseDTO error = new StandardErrorResponseDTO(
+                LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
+                400,
+                "Bad Request",
+                "The new password must be different from the current password.",
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(400).body(error);
+    }
+
     @ExceptionHandler(UserAlreadyExistsException.class)
     public ResponseEntity<StandardErrorResponseDTO> handleUserAlreadyExists(UserAlreadyExistsException exception, HttpServletRequest request) {
         exception.printStackTrace();
@@ -78,6 +92,20 @@ public class GlobalExceptionHandler {
         );
 
         return ResponseEntity.status(404).body(error);
+    }
+
+    @ExceptionHandler(InvalidUserStatusException.class)
+    public ResponseEntity<StandardErrorResponseDTO> handleInvalidUserStatusException(InvalidCredentialsException exception, HttpServletRequest request){
+
+        StandardErrorResponseDTO error = new StandardErrorResponseDTO(
+                LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
+                422,
+                "Unprocessable Entity",
+                "User unavailable",
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(422).body(error);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

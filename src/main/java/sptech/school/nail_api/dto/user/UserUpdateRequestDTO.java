@@ -1,7 +1,6 @@
 package sptech.school.nail_api.dto.user;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -19,18 +18,6 @@ public class UserUpdateRequestDTO {
     )
     private String name;
 
-    @NotBlank(message = "The email cannot be blank.")
-    @Email(message = "The email must be correctly formatted.")
-    @Size(max = 255, message = "The email must contain at most 255 characters.")
-    @Schema(
-            description = "E-mail do usuário. Deve possuir um formato válido e não estar cadastrado para outro usuário.",
-            example = "maria@email.com",
-            format = "email",
-            maxLength = 255,
-            requiredMode = Schema.RequiredMode.REQUIRED
-    )
-    private String email;
-
     @Size(max = 20, message = "The phone must contain at most 20 characters.")
     @Schema(
             description = "Telefone de contato. Campo opcional.",
@@ -44,9 +31,8 @@ public class UserUpdateRequestDTO {
     public UserUpdateRequestDTO() {
     }
 
-    public UserUpdateRequestDTO(String name, String email, String phone) {
+    public UserUpdateRequestDTO(String name, String phone) {
         this.name = name;
-        this.email = email;
         this.phone = phone;
     }
 
@@ -56,14 +42,6 @@ public class UserUpdateRequestDTO {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPhone() {
