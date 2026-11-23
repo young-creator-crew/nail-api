@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,7 +16,7 @@ public class NailService {
     @Column(name = "id_nail_service")
     private Integer idNailService;
 
-    @Column(name = "service_name", nullable = false, length = 100)
+    @Column(name = "service_name", nullable = false, length = 100, unique = true)
     private String serviceName;
 
     @Column(name = "service_description", length = 500)
@@ -24,11 +25,11 @@ public class NailService {
     @Column(name = "price", nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
 
-    @Column(name = "duration_minutes", nullable = false)
+    @Column(name = "duration_minutes", nullable = true)
     private Integer durationMinutes;
 
-    @OneToMany
-    private List<NailServiceImg> urlImages;
+    @OneToMany(mappedBy = "nailService", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<NailServiceMedia> urlImages = new ArrayList<>();
 
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = true;
@@ -82,11 +83,11 @@ public class NailService {
         this.durationMinutes = durationMinutes;
     }
 
-    public List<NailServiceImg> getUrlImages() {
+    public List<NailServiceMedia> getUrlImages() {
         return urlImages;
     }
 
-    public void setUrlImages(List<NailServiceImg> urlImages) {
+    public void setUrlImages(List<NailServiceMedia> urlImages) {
         this.urlImages = urlImages;
     }
 

@@ -3,7 +3,6 @@ package sptech.school.nail_api.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Encoding;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -13,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import sptech.school.nail_api.dto.service.create.ServiceCreateRequestDTO;
 import sptech.school.nail_api.dto.service.update.ServiceUpdateRequestDTO;
 import sptech.school.nail_api.dto.service.response.ServiceResponseDTO;
@@ -56,13 +54,14 @@ public class ServiceController {
     @Operation(summary = "Consultar serviço por ID", description = "Retorna os dados completos de um serviço, incluindo modalidades, preços, durações estimadas e adicionais ativos.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Serviço encontrado.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ServiceResponseDTO.class))),
-            @ApiResponse(responseCode = "404", description = "Serviço não encontrado.", content = @Content)
+            @ApiResponse(responseCode = "404", description = "Serviço não encontrado.", content = @Content),
+            @ApiResponse(responseCode = "422", description = "Serviço desativado.", content = @Content)
     })
     public ResponseEntity<ServiceResponseDTO> getService(@PathVariable Integer id) {
         return ResponseEntity.ok(serviceService.get(id));
     }
 
-    @PostMapping()
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Cadastrar serviço", description = "Cria um serviço ativo com nome, descrição, modalidades e adicionais.")
     @io.swagger.v3.oas.annotations.parameters.RequestBody(
             description = "Dados do serviço em JSON",
@@ -74,27 +73,27 @@ public class ServiceController {
             @ApiResponse(responseCode = "409", description = "Já existe um serviço cadastrado com esse nome.", content = @Content),
             @ApiResponse(responseCode = "415", description = "Tipo de conteúdo da requisição ou de uma de suas partes não suportado.", content = @Content)
     })
-    public ResponseEntity<ServiceResponseDTO> createService(@Valid @RequestPart("service") ServiceCreateRequestDTO request) {
+    public ResponseEntity<ServiceResponseDTO> createService(@Valid @RequestBody ServiceCreateRequestDTO request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(serviceService.create(request));
     }
 
-    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @Operation(summary = "Atualizar serviço", description = "Atualiza o nome, a descrição, a foto opcional, as modalidades e os adicionais de um serviço existente. As listas devem ser completas; IDs identificam modalidades e adicionais já existentes.")
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Atualizar serviço", description = "Atualiza o nome, a descrição, o preço e a duração de um serviço ativo existente.")
     @io.swagger.v3.oas.annotations.parameters.RequestBody(
-            description = "Dados atualizados do serviço em JSON e, opcionalmente, arquivo de imagem.",
-            required = true,
-            content = @Content(mediaType = MediaType.MULTIPART_FORM_DATA_VALUE, encoding = @Encoding(name = "service", contentType = MediaType.APPLICATION_JSON_VALUE))
+            description = "Dados atualizados do serviço em JSON.",
+            required = true
     )
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Serviço atualizado com sucesso.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ServiceResponseDTO.class))),
             @ApiResponse(responseCode = "400", description = "Dados inválidos ou modalidade ou adicional não pertencente ao serviço.", content = @Content),
             @ApiResponse(responseCode = "404", description = "Serviço não encontrado.", content = @Content),
             @ApiResponse(responseCode = "409", description = "Já existe outro serviço cadastrado com esse nome.", content = @Content),
-            @ApiResponse(responseCode = "415", description = "Tipo de conteúdo da requisição ou de uma de suas partes não suportado.", content = @Content)
+            @ApiResponse(responseCode = "415", description = "Tipo de conteúdo da requisição não suportado.", content = @Content),
+            @ApiResponse(responseCode = "422", description = "O serviço está desativado e não pode ser atualizado.", content = @Content)
     })
     public ResponseEntity<ServiceResponseDTO> updateService(
             @PathVariable Integer id,
-            @Valid @RequestPart("service") ServiceUpdateRequestDTO request
+            @Valid @RequestBody ServiceUpdateRequestDTO request
     ) {
         return ResponseEntity.ok(serviceService.update(request, id));
     }
@@ -103,7 +102,8 @@ public class ServiceController {
     @Operation(summary = "Desativar serviço", description = "Desativa um serviço sem excluí-lo fisicamente, preservando os registros relacionados.")
     @ApiResponses({
             @ApiResponse(responseCode = "204", description = "Serviço desativado com sucesso.", content = @Content),
-            @ApiResponse(responseCode = "404", description = "Serviço não encontrado.", content = @Content)
+            @ApiResponse(responseCode = "404", description = "Serviço não encontrado.", content = @Content),
+            @ApiResponse(responseCode = "422", description = "O serviço já está desativado.", content = @Content)
     })
     public ResponseEntity<Void> deactivateService(@PathVariable Integer id) {
         serviceService.deactivate(id);

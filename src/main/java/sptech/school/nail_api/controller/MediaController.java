@@ -5,7 +5,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import sptech.school.nail_api.dto.service.response.MediaResponseDTO;
+import sptech.school.nail_api.dto.media.MediaResponseDTO;
 import sptech.school.nail_api.service.MediaService;
 
 @RestController

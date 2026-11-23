@@ -11,6 +11,9 @@ import sptech.school.nail_api.exception.appointment.AppointmentNotFoundException
 import sptech.school.nail_api.exception.appointment.AppointmentValidationException;
 import sptech.school.nail_api.exception.auth.InvalidCredentialsException;
 import sptech.school.nail_api.exception.database.DataBaseAccessException;
+import sptech.school.nail_api.exception.service.ServiceAlreadyExistsException;
+import sptech.school.nail_api.exception.service.ServiceNotActiveExeption;
+import sptech.school.nail_api.exception.service.ServiceNotFoundException;
 import sptech.school.nail_api.exception.user.UserAlreadyExistsException;
 import sptech.school.nail_api.exception.user.UserNotFoundException;
 
@@ -139,6 +142,46 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(409).body(error);
     }
 
+    @ExceptionHandler(ServiceNotActiveExeption.class)
+    public ResponseEntity<StandardErrorResponseDTO> handleServiceNotActive(ServiceNotActiveExeption exception, HttpServletRequest request) {
+        StandardErrorResponseDTO error = new StandardErrorResponseDTO(
+                LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
+                422,
+                "Unprocessable Entity",
+                exception.getMessage(),
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(422).body(error);
+    }
+
+    @ExceptionHandler(ServiceNotFoundException.class)
+    public ResponseEntity<StandardErrorResponseDTO> handleServiceNotFound(ServiceNotFoundException exception, HttpServletRequest request) {
+        StandardErrorResponseDTO error = new StandardErrorResponseDTO(
+                LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
+                404,
+                "Not Found",
+                exception.getMessage(),
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(404).body(error);
+    }
+
+    @ExceptionHandler(ServiceAlreadyExistsException.class)
+    public ResponseEntity<StandardErrorResponseDTO> handleServiceAlreadyExists(ServiceAlreadyExistsException exception, HttpServletRequest request) {
+        StandardErrorResponseDTO error = new StandardErrorResponseDTO(
+                LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
+                409,
+                "Conflict",
+                exception.getMessage(),
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(409).body(error);
+    }
+
+    @ExceptionHandler(Exception.class)
     public ResponseEntity<StandardErrorResponseDTO> handleGenericException(Exception exception, HttpServletRequest request) {
         exception.printStackTrace();
 

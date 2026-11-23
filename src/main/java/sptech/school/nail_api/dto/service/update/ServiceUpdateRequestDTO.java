@@ -1,13 +1,9 @@
 package sptech.school.nail_api.dto.service.update;
 
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
-import org.aspectj.lang.annotation.Before;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Schema(description = "Solicitar dados para a atualização de um serviço, incluindo sua lista completa de modalidades e complementos.")
 public class ServiceUpdateRequestDTO {

@@ -2,8 +2,6 @@ package sptech.school.nail_api.dto.service.response;
 
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 import sptech.school.nail_api.dto.media.MediaResponseDTO;
 
 import java.math.BigDecimal;

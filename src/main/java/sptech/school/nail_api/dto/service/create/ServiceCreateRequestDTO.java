@@ -1,12 +1,9 @@
 package sptech.school.nail_api.dto.service.create;
 
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Schema(description = "Solicitar dados para a criação de um serviço completo, incluindo suas modalidades e complementos.")
 public class ServiceCreateRequestDTO {

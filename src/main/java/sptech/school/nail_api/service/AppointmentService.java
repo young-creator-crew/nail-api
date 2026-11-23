@@ -144,8 +144,6 @@ public class AppointmentService {
         Appointment appointment = new Appointment();
 
         appointment.setUser(client);
-        appointment.setNailServiceOption(option);
-        appointment.setNailServiceAddon(addon);
         appointment.setScheduledStartAt(start);
         appointment.setScheduledEndAt(end);
         appointment.setAppointmentStatus(AppointmentStatus.AGENDADO);
@@ -200,8 +198,6 @@ public class AppointmentService {
 
         ensureAvailable(start, end, appointmentId);
 
-        appointment.setNailServiceOption(option);
-        appointment.setNailServiceAddon(addon);
         appointment.setScheduledStartAt(start);
         appointment.setScheduledEndAt(end);
 
@@ -308,7 +304,7 @@ public class AppointmentService {
 
         NailService service = findService(option.getNailService().getIdNailService());
 
-        if (!service.getActive()) {
+        if (!Boolean.TRUE.equals(service.getActive())) {
             throw new AppointmentValidationException("O serviço selecionado está inativo.");
         }
 

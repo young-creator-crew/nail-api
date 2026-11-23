@@ -1,9 +1,11 @@
 package sptech.school.nail_api.service;
 
 import org.springframework.web.multipart.MultipartFile;
-import sptech.school.nail_api.dto.service.response.MediaResponseDTO;
+import org.springframework.stereotype.Service;
+import sptech.school.nail_api.dto.media.MediaResponseDTO;
 import sptech.school.nail_api.repository.NailServiceMediaRepository;
 
+@Service
 public class MediaService {
 
     private final NailServiceMediaRepository mediaRepository;
