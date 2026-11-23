@@ -2,7 +2,11 @@ package sptech.school.nail_api.dto.service.response;
 
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import sptech.school.nail_api.dto.media.MediaResponseDTO;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Schema(description = "Dados completos da resposta de um serviço, incluindo suas modalidades e complementos.")
@@ -17,35 +21,32 @@ public class ServiceResponseDTO {
     @Schema(description = "Descrição do serviço.", example = "Alongamento de unhas com gel.", nullable = true)
     private String serviceDescription;
 
-    @Schema(description = "URL da foto do serviço.", example = "/fotos/2f59a2d0.jpg", nullable = true)
-    private String photoUrl;
+    @Schema(description = "Preço do serviço", example = "150.00", nullable = false, requiredMode = Schema.RequiredMode.REQUIRED)
+    private BigDecimal servicePrice;
+
+    @Schema(description = "Duração estimada de um serviço em minutos", example = "120", nullable = true, requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    private Integer serviceDurationMinutes;
+
+    @ArraySchema(
+            arraySchema = @Schema (description = "Todas as imagem de um serviço"),
+            schema = @Schema(implementation = MediaResponseDTO.class)
+    )
+    private List<MediaResponseDTO> photosUrl;
 
     @Schema(description = "Indica se o serviço está ativo.", example = "true")
     private Boolean active;
 
-    @ArraySchema(
-            arraySchema = @Schema(description = "Modalidades ativas disponíveis para este serviço."),
-            schema = @Schema(implementation = ServiceOptionResponseDTO.class)
-    )
-    private List<ServiceOptionResponseDTO> options;
-
-    @ArraySchema(
-            arraySchema = @Schema(description = "Complementos ativos disponíveis para este serviço."),
-            schema = @Schema(implementation = ServiceAddonResponseDTO.class)
-    )
-    private List<ServiceAddonResponseDTO> addons;
-
     public ServiceResponseDTO() {
     }
 
-    public ServiceResponseDTO(Integer idNailService, String serviceName, String serviceDescription, String photoUrl, Boolean active, List<ServiceOptionResponseDTO> options, List<ServiceAddonResponseDTO> addons) {
+    public ServiceResponseDTO(Integer idNailService, String serviceName, String serviceDescription, BigDecimal servicePrice, Integer serviceDurationMinutes, List<MediaResponseDTO> photosUrl, Boolean active) {
         this.idNailService = idNailService;
         this.serviceName = serviceName;
         this.serviceDescription = serviceDescription;
-        this.photoUrl = photoUrl;
+        this.servicePrice = servicePrice;
+        this.serviceDurationMinutes = serviceDurationMinutes;
+        this.photosUrl = photosUrl;
         this.active = active;
-        this.options = options;
-        this.addons = addons;
     }
 
     public Integer getIdNailService() {
@@ -72,12 +73,28 @@ public class ServiceResponseDTO {
         this.serviceDescription = serviceDescription;
     }
 
-    public String getPhotoUrl() {
-        return photoUrl;
+    public BigDecimal getServicePrice() {
+        return servicePrice;
     }
 
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
+    public void setServicePrice(BigDecimal servicePrice) {
+        this.servicePrice = servicePrice;
+    }
+
+    public Integer getServiceDurationMinutes() {
+        return serviceDurationMinutes;
+    }
+
+    public void setServiceDurationMinutes(Integer serviceDurationMinutes) {
+        this.serviceDurationMinutes = serviceDurationMinutes;
+    }
+
+    public List<MediaResponseDTO> getPhotosUrl() {
+        return photosUrl;
+    }
+
+    public void setPhotosUrl(List<MediaResponseDTO> photosUrl) {
+        this.photosUrl = photosUrl;
     }
 
     public Boolean getActive() {
@@ -86,21 +103,5 @@ public class ServiceResponseDTO {
 
     public void setActive(Boolean active) {
         this.active = active;
-    }
-
-    public List<ServiceOptionResponseDTO> getOptions() {
-        return options;
-    }
-
-    public void setOptions(List<ServiceOptionResponseDTO> options) {
-        this.options = options;
-    }
-
-    public List<ServiceAddonResponseDTO> getAddons() {
-        return addons;
-    }
-
-    public void setAddons(List<ServiceAddonResponseDTO> addons) {
-        this.addons = addons;
     }
 }

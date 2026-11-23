@@ -2,7 +2,9 @@ package sptech.school.nail_api.entity;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "nail_services")
@@ -19,8 +21,14 @@ public class NailService {
     @Column(name = "service_description", length = 500)
     private String serviceDescription;
 
-    @Column(name = "photo_url", length = 2048)
-    private String photoUrl;
+    @Column(name = "price", nullable = false, precision = 10, scale = 2)
+    private BigDecimal price;
+
+    @Column(name = "duration_minutes", nullable = false)
+    private Integer durationMinutes;
+
+    @OneToMany
+    private List<NailServiceImg> urlImages;
 
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = true;
@@ -58,12 +66,28 @@ public class NailService {
         this.serviceDescription = serviceDescription;
     }
 
-    public String getPhotoUrl() {
-        return photoUrl;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public Integer getDurationMinutes() {
+        return durationMinutes;
+    }
+
+    public void setDurationMinutes(Integer durationMinutes) {
+        this.durationMinutes = durationMinutes;
+    }
+
+    public List<NailServiceImg> getUrlImages() {
+        return urlImages;
+    }
+
+    public void setUrlImages(List<NailServiceImg> urlImages) {
+        this.urlImages = urlImages;
     }
 
     public Boolean getActive() {

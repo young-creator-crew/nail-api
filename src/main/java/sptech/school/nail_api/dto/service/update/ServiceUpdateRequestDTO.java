@@ -3,11 +3,10 @@ package sptech.school.nail_api.dto.service.update;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
+import org.aspectj.lang.annotation.Before;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Schema(description = "Solicitar dados para a atualização de um serviço, incluindo sua lista completa de modalidades e complementos.")
@@ -22,30 +21,23 @@ public class ServiceUpdateRequestDTO {
     @Size(max = 500, message = "The service description must not exceed 500 characters.")
     private String serviceDescription;
 
-    @ArraySchema(
-            arraySchema = @Schema(description = "Lista completa das modalidades de serviço a serem mantidas ou criadas. As modalidades existentes que não constarem desta lista serão desativadas.", requiredMode = Schema.RequiredMode.REQUIRED),
-            schema = @Schema(implementation = ServiceOptionUpdateRequestDTO.class)
-    )
-    @NotEmpty(message = "At least one service modality is required.")
-    @Valid
-    private List<ServiceOptionUpdateRequestDTO> options;
+    @Schema(description = "Preço do serviço", example = "150.00", nullable = false, requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull
+    @Positive
+    private BigDecimal servicePrice;
 
-    @ArraySchema(
-            arraySchema = @Schema(description = "Lista completa de complementos a manter ou criar. Use um array vazio caso não haja complementos. Complementos existentes que não constarem nesta lista serão desativados.", requiredMode = Schema.RequiredMode.REQUIRED),
-            schema = @Schema(implementation = ServiceAddonUpdateRequestDTO.class)
-    )
-    @NotNull(message = "The addons list is required. Use an empty list if there are no addons.")
-    @Valid
-    private List<ServiceAddonUpdateRequestDTO> addons;
+    @Schema(description = "Duração estimada de um serviço em minutos", example = "120", nullable = true, requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @Positive
+    private Integer serviceDurationMinutes;
 
     public ServiceUpdateRequestDTO() {
     }
 
-    public ServiceUpdateRequestDTO(String serviceName, String serviceDescription, List<ServiceOptionUpdateRequestDTO> options, List<ServiceAddonUpdateRequestDTO> addons) {
+    public ServiceUpdateRequestDTO(String serviceName, String serviceDescription, BigDecimal servicePrice, Integer serviceDurationMinutes) {
         this.serviceName = serviceName;
         this.serviceDescription = serviceDescription;
-        this.options = options;
-        this.addons = addons;
+        this.servicePrice = servicePrice;
+        this.serviceDurationMinutes = serviceDurationMinutes;
     }
 
     public String getServiceName() {
@@ -64,19 +56,19 @@ public class ServiceUpdateRequestDTO {
         this.serviceDescription = serviceDescription;
     }
 
-    public List<ServiceOptionUpdateRequestDTO> getOptions() {
-        return options;
+    public BigDecimal getServicePrice() {
+        return servicePrice;
     }
 
-    public void setOptions(List<ServiceOptionUpdateRequestDTO> options) {
-        this.options = options;
+    public void setServicePrice(BigDecimal servicePrice) {
+        this.servicePrice = servicePrice;
     }
 
-    public List<ServiceAddonUpdateRequestDTO> getAddons() {
-        return addons;
+    public Integer getServiceDurationMinutes() {
+        return serviceDurationMinutes;
     }
 
-    public void setAddons(List<ServiceAddonUpdateRequestDTO> addons) {
-        this.addons = addons;
+    public void setServiceDurationMinutes(Integer serviceDurationMinutes) {
+        this.serviceDurationMinutes = serviceDurationMinutes;
     }
 }

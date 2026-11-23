@@ -3,11 +3,9 @@ package sptech.school.nail_api.dto.service.create;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Schema(description = "Solicitar dados para a criação de um serviço completo, incluindo suas modalidades e complementos.")
@@ -22,30 +20,23 @@ public class ServiceCreateRequestDTO {
     @Size(max = 500, message = "The service description must not exceed 500 characters.")
     private String serviceDescription;
 
-    @ArraySchema(
-            arraySchema = @Schema(description = "Modalidades de atendimento disponíveis para este serviço.", requiredMode = Schema.RequiredMode.REQUIRED),
-            schema = @Schema(implementation = ServiceOptionCreateRequestDTO.class)
-    )
-    @NotEmpty(message = "At least one service modality is required.")
-    @Valid
-    private List<ServiceOptionCreateRequestDTO> options;
+    @Schema(description = "Preço do serviço", example = "150.00", nullable = false, requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull
+    @Positive
+    private BigDecimal servicePrice;
 
-    @ArraySchema(
-            arraySchema = @Schema(description = "Complementos disponíveis para este serviço. Envie um array vazio caso o serviço não possua complementos.", requiredMode = Schema.RequiredMode.REQUIRED),
-            schema = @Schema(implementation = ServiceAddonCreateRequestDTO.class)
-    )
-    @NotNull(message = "The addons list is required. Use an empty list if there are no addons.")
-    @Valid
-    private List<ServiceAddonCreateRequestDTO> addons;
+    @Schema(description = "Duração estimada de um serviço em minutos", example = "120", nullable = true, requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    @Positive
+    private Integer serviceDurationMinutes;
 
     public ServiceCreateRequestDTO() {
     }
 
-    public ServiceCreateRequestDTO(String serviceName, String serviceDescription, List<ServiceOptionCreateRequestDTO> options, List<ServiceAddonCreateRequestDTO> addons) {
+    public ServiceCreateRequestDTO(String serviceName, String serviceDescription, BigDecimal servicePrice, Integer serviceDurationMinutes) {
         this.serviceName = serviceName;
         this.serviceDescription = serviceDescription;
-        this.options = options;
-        this.addons = addons;
+        this.servicePrice = servicePrice;
+        this.serviceDurationMinutes = serviceDurationMinutes;
     }
 
     public String getServiceName() {
@@ -64,19 +55,19 @@ public class ServiceCreateRequestDTO {
         this.serviceDescription = serviceDescription;
     }
 
-    public List<ServiceOptionCreateRequestDTO> getOptions() {
-        return options;
+    public BigDecimal getServicePrice() {
+        return servicePrice;
     }
 
-    public void setOptions(List<ServiceOptionCreateRequestDTO> options) {
-        this.options = options;
+    public void setServicePrice(BigDecimal servicePrice) {
+        this.servicePrice = servicePrice;
     }
 
-    public List<ServiceAddonCreateRequestDTO> getAddons() {
-        return addons;
+    public Integer getServiceDurationMinutes() {
+        return serviceDurationMinutes;
     }
 
-    public void setAddons(List<ServiceAddonCreateRequestDTO> addons) {
-        this.addons = addons;
+    public void setServiceDurationMinutes(Integer serviceDurationMinutes) {
+        this.serviceDurationMinutes = serviceDurationMinutes;
     }
 }

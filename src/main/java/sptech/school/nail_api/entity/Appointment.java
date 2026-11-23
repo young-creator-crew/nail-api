@@ -22,13 +22,13 @@ public class Appointment {
     @JoinColumn(name = "fk_client", nullable = false)
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "fk_nail_service_option", nullable = false)
-    private NailServiceOption nailServiceOption;
-
-    @ManyToOne
-    @JoinColumn(name = "fk_nail_service_addon")
-    private NailServiceAddon nailServiceAddon;
+//    @ManyToOne
+//    @JoinColumn(name = "fk_nail_service_option", nullable = false)
+//    private NailServiceOption nailServiceOption;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "fk_nail_service_addon")
+//    private NailServiceAddon nailServiceAddon;
 
     @Column(name = "scheduled_start_at", nullable = false)
     private LocalDateTime scheduledStartAt;
@@ -86,21 +86,21 @@ public class Appointment {
         this.user = user;
     }
 
-    public NailServiceOption getNailServiceOption() {
-        return nailServiceOption;
-    }
-
-    public void setNailServiceOption(NailServiceOption nailServiceOption) {
-        this.nailServiceOption = nailServiceOption;
-    }
-
-    public NailServiceAddon getNailServiceAddon() {
-        return nailServiceAddon;
-    }
-
-    public void setNailServiceAddon(NailServiceAddon nailServiceAddon) {
-        this.nailServiceAddon = nailServiceAddon;
-    }
+//    public NailServiceOption getNailServiceOption() {
+//        return nailServiceOption;
+//    }
+//
+//    public void setNailServiceOption(NailServiceOption nailServiceOption) {
+//        this.nailServiceOption = nailServiceOption;
+//    }
+//
+//    public NailServiceAddon getNailServiceAddon() {
+//        return nailServiceAddon;
+//    }
+//
+//    public void setNailServiceAddon(NailServiceAddon nailServiceAddon) {
+//        this.nailServiceAddon = nailServiceAddon;
+//    }
 
     public LocalDateTime getScheduledStartAt() {
         return scheduledStartAt;

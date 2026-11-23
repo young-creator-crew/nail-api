@@ -62,12 +62,11 @@ public class ServiceController {
         return ResponseEntity.ok(serviceService.get(id));
     }
 
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @Operation(summary = "Cadastrar serviço", description = "Cria um serviço ativo com nome, descrição, foto opcional, modalidades e adicionais. A parte 'service' deve conter JSON e a parte 'foto' pode conter uma imagem.")
+    @PostMapping()
+    @Operation(summary = "Cadastrar serviço", description = "Cria um serviço ativo com nome, descrição, modalidades e adicionais.")
     @io.swagger.v3.oas.annotations.parameters.RequestBody(
-            description = "Dados do serviço em JSON e, opcionalmente, arquivo de imagem.",
-            required = true,
-            content = @Content(mediaType = MediaType.MULTIPART_FORM_DATA_VALUE, encoding = @Encoding(name = "service", contentType = MediaType.APPLICATION_JSON_VALUE))
+            description = "Dados do serviço em JSON",
+            required = true
     )
     @ApiResponses({
             @ApiResponse(responseCode = "201", description = "Serviço cadastrado com sucesso.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ServiceResponseDTO.class))),
@@ -75,12 +74,8 @@ public class ServiceController {
             @ApiResponse(responseCode = "409", description = "Já existe um serviço cadastrado com esse nome.", content = @Content),
             @ApiResponse(responseCode = "415", description = "Tipo de conteúdo da requisição ou de uma de suas partes não suportado.", content = @Content)
     })
-    public ResponseEntity<ServiceResponseDTO> createService(
-            @Valid @RequestPart("service") ServiceCreateRequestDTO request,
-            @RequestPart(value = "foto", required = false) MultipartFile foto
-    ) {
-        ServiceResponseDTO response = serviceService.create(request, foto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    public ResponseEntity<ServiceResponseDTO> createService(@Valid @RequestPart("service") ServiceCreateRequestDTO request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(serviceService.create(request));
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -99,11 +94,9 @@ public class ServiceController {
     })
     public ResponseEntity<ServiceResponseDTO> updateService(
             @PathVariable Integer id,
-            @Valid @RequestPart("service") ServiceUpdateRequestDTO request,
-            @RequestPart(value = "foto", required = false) MultipartFile foto
+            @Valid @RequestPart("service") ServiceUpdateRequestDTO request
     ) {
-        ServiceResponseDTO response = serviceService.update(request, id, foto);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(serviceService.update(request, id));
     }
 
     @DeleteMapping("/{id}")
