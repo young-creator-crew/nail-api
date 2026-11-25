@@ -12,7 +12,6 @@ import sptech.school.nail_api.exception.appointment.AppointmentValidationExcepti
 import sptech.school.nail_api.mapper.AppointmentMapper;
 import sptech.school.nail_api.repository.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -37,26 +36,20 @@ public class AppointmentService {
             EnumSet.of(
                     AppointmentStatus.AGENDADO,
                     AppointmentStatus.CONFIRMADO
-            );
+    );
 
     private final AppointmentRepository appointmentsRepository;
-    private final NailServiceOptionRepository optionsRepository;
-    private final NailServiceAddonRepository addonsRepository;
     private final UserRepository usersRepository;
     private final NailServiceRepository serviceRepository;
     private final AppointmentMapper appointmentMapper;
 
     public AppointmentService(
             AppointmentRepository appointmentsRepository,
-            NailServiceOptionRepository optionsRepository,
-            NailServiceAddonRepository addonsRepository,
             UserRepository usersRepository,
             NailServiceRepository serviceRepository,
             AppointmentMapper appointmentMapper
     ) {
         this.appointmentsRepository = appointmentsRepository;
-        this.optionsRepository = optionsRepository;
-        this.addonsRepository = addonsRepository;
         this.usersRepository = usersRepository;
         this.serviceRepository = serviceRepository;
         this.appointmentMapper = appointmentMapper;
@@ -67,10 +60,10 @@ public class AppointmentService {
     // =========================================================
 
     @Transactional(readOnly = true)
-    public List<AvailableSlotResponseDTO> getAvailableSlots(LocalDate date, Integer serviceOptionId) {
+    public List<AvailableSlotResponseDTO> getAvailableSlots(LocalDate date, Integer serviceId) {
         validateAvailabilityDate(date);
 
-        NailServiceOption option = findActiveOption(serviceOptionId);
+        NailService service = findActiveService(serviceId);
 
         LocalDateTime dayStart = date.atTime(OPENING_TIME);
         LocalDateTime dayEnd = date.atTime(CLOSING_TIME);
@@ -88,7 +81,7 @@ public class AppointmentService {
         LocalDateTime start = dayStart;
 
         while (true) {
-            LocalDateTime end = start.plusMinutes(option.getDurationMinutes());
+            LocalDateTime end = start.plusMinutes(service.getDurationMinutes());
 
             // Não permite terminar depois das 20h.
             if (end.isAfter(dayEnd)) { break; }
@@ -127,15 +120,11 @@ public class AppointmentService {
     public AppointmentResponseDTO create(Integer userId, AppointmentRequestDTO request) {
         User client = findClient(userId);
 
-        NailServiceOption option = findActiveOption(request.getServiceOptionId());
-
-        NailServiceAddon addon = findValidAddon(request.getAddonId(), option);
-
-        NailService service = findService(option.getNailService().getIdNailService());
+        NailService service = findActiveService(request.getServiceId());
 
         LocalDateTime start = request.getScheduledStartAt();
 
-        LocalDateTime end = start.plusMinutes(option.getDurationMinutes());
+        LocalDateTime end = start.plusMinutes(service.getDurationMinutes());
 
         validateInterval(start, end);
 
@@ -148,7 +137,7 @@ public class AppointmentService {
         appointment.setScheduledEndAt(end);
         appointment.setAppointmentStatus(AppointmentStatus.AGENDADO);
 
-        applySnapshots(appointment, service, option, addon);
+        applySnapshots(appointment, service);
 
         Appointment saved = appointmentsRepository.save(appointment);
 
@@ -184,15 +173,11 @@ public class AppointmentService {
 
         validateEditableStatus(appointment);
 
-        NailServiceOption option = findActiveOption(request.getServiceOptionId());
-
-        NailServiceAddon addon = findValidAddon(request.getAddonId(), option);
-
-        NailService service = findService(option.getNailService().getIdNailService());
+        NailService service = findActiveService(request.getServiceId());
 
         LocalDateTime start = request.getScheduledStartAt();
 
-        LocalDateTime end = start.plusMinutes(option.getDurationMinutes());
+        LocalDateTime end = start.plusMinutes(service.getDurationMinutes());
 
         validateInterval(start, end);
 
@@ -201,7 +186,7 @@ public class AppointmentService {
         appointment.setScheduledStartAt(start);
         appointment.setScheduledEndAt(end);
 
-        applySnapshots(appointment, service, option, addon);
+        applySnapshots(appointment, service);
 
         Appointment saved = appointmentsRepository.save(appointment);
 
@@ -295,42 +280,13 @@ public class AppointmentService {
         return usersRepository.findById(id).orElseThrow(() -> new AppointmentNotFoundException("Usuário autenticado não encontrado."));
     }
 
-    private NailServiceOption findActiveOption(Integer optionId) {
-
-
-        NailServiceOption option = optionsRepository
-                .findById(optionId)
-                .orElseThrow(() -> new AppointmentNotFoundException("Modalidade de serviço não encontrada."));
-
-        NailService service = findService(option.getNailService().getIdNailService());
-
+    private NailService findActiveService(Integer serviceId) {
+        NailService service = findService(serviceId);
         if (!Boolean.TRUE.equals(service.getActive())) {
             throw new AppointmentValidationException("O serviço selecionado está inativo.");
         }
 
-        if (!option.getActive()) {
-            throw new AppointmentValidationException("A modalidade selecionada está inativa.");
-        }
-
-        return option;
-    }
-
-    private NailServiceAddon findValidAddon(Integer addonId, NailServiceOption option) {
-        if (addonId == null) { return null; }
-
-        NailServiceAddon addon = addonsRepository
-                .findById(addonId)
-                .orElseThrow(() -> new AppointmentNotFoundException("Adicional não encontrado."));
-
-        if (!addon.getActive()) {
-            throw new AppointmentValidationException("O adicional selecionado está inativo.");
-        }
-
-        if (!addon.getNailService().getIdNailService().equals(option.getNailService().getIdNailService())) {
-            throw new AppointmentValidationException("O adicional não pertence ao serviço selecionado.");
-        }
-
-        return addon;
+        return service;
     }
 
     private NailService findService(Integer serviceId) {
@@ -418,14 +374,9 @@ public class AppointmentService {
         }
     }
 
-    private void applySnapshots(Appointment appointment, NailService service, NailServiceOption option, NailServiceAddon addon) {
-        BigDecimal addonPrice = addon == null ? BigDecimal.ZERO : addon.getAdditionalPrice();
-
+    private void applySnapshots(Appointment appointment, NailService service) {
         appointment.setServiceNameSnapshot(service.getServiceName());
-        appointment.setOptionTypeSnapshot(option.getOptionType());
-        appointment.setServicePriceSnapshot(option.getPrice());
-        appointment.setAddonNameSnapshot(addon == null ? null : addon.getAddonName());
-        appointment.setAddonPriceSnapshot(addonPrice);
-        appointment.setAppointmentValue(option.getPrice().add(addonPrice));
+        appointment.setServicePriceSnapshot(service.getPrice());
+        appointment.setAppointmentValue(service.getPrice());
     }
 }

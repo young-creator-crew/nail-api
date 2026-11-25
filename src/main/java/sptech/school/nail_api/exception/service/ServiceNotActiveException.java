@@ -1,7 +1,7 @@
 package sptech.school.nail_api.exception.service;
 
-public class ServiceNotActiveExeption extends RuntimeException {
-    public ServiceNotActiveExeption() {
+public class ServiceNotActiveException extends RuntimeException {
+    public ServiceNotActiveException() {
         super("The requested service is not active");
     }
 }

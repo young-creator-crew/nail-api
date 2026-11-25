@@ -32,11 +32,11 @@ public class MediaMapper {
         }
 
         return new MediaResponseDTO(
+                media.getIdImg(),
                 media.getImgUrl(),
-                media.getObjectName(),
                 media.getNailService() == null || media.getNailService().getIdNailService() == null
                         ? null
-                        : Long.valueOf(media.getNailService().getIdNailService())
+                        : media.getNailService().getIdNailService()
         );
     }
 

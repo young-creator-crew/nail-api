@@ -2,17 +2,25 @@ package sptech.school.nail_api.dto.media;
 
 public class MediaResponseDTO {
 
+    private Integer id;
     private String imageUrl;
-    private String objectName;
-    private Long serviceId;
+    private Integer serviceId;
 
     public MediaResponseDTO() {
     }
 
-    public MediaResponseDTO(String imageUrl, String objectName, Long serviceId) {
+    public MediaResponseDTO(Integer id, String imageUrl, Integer serviceId) {
+        this.id = id;
         this.imageUrl = imageUrl;
-        this.objectName = objectName;
         this.serviceId = serviceId;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getImageUrl() {
@@ -23,19 +31,11 @@ public class MediaResponseDTO {
         this.imageUrl = imageUrl;
     }
 
-    public String getObjectName() {
-        return objectName;
-    }
-
-    public void setObjectName(String objectName) {
-        this.objectName = objectName;
-    }
-
-    public Long getServiceId() {
+    public Integer getServiceId() {
         return serviceId;
     }
 
-    public void setServiceId(Long serviceId) {
+    public void setServiceId(Integer serviceId) {
         this.serviceId = serviceId;
     }
 }

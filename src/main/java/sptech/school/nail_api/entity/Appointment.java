@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.Generated;
 import org.hibernate.generator.EventType;
 import sptech.school.nail_api.enums.AppointmentStatus;
-import sptech.school.nail_api.enums.OptionType;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -22,14 +21,6 @@ public class Appointment {
     @JoinColumn(name = "fk_client", nullable = false)
     private User user;
 
-//    @ManyToOne
-//    @JoinColumn(name = "fk_nail_service_option", nullable = false)
-//    private NailServiceOption nailServiceOption;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "fk_nail_service_addon")
-//    private NailServiceAddon nailServiceAddon;
-
     @Column(name = "scheduled_start_at", nullable = false)
     private LocalDateTime scheduledStartAt;
 
@@ -39,18 +30,8 @@ public class Appointment {
     @Column(name = "service_name_snapshot", nullable = false, length = 100)
     private String serviceNameSnapshot;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "option_type_snapshot", nullable = false)
-    private OptionType optionTypeSnapshot;
-
     @Column(name = "service_price_snapshot", nullable = false, precision = 10, scale = 2)
     private BigDecimal servicePriceSnapshot;
-
-    @Column(name = "addon_name_snapshot", length = 100)
-    private String addonNameSnapshot;
-
-    @Column(name = "addon_price_snapshot", nullable = false, precision = 10, scale = 2)
-    private BigDecimal addonPriceSnapshot = BigDecimal.ZERO;
 
     @Column(name = "appointment_value", nullable = false, precision = 10, scale = 2)
     private BigDecimal appointmentValue;
@@ -86,22 +67,6 @@ public class Appointment {
         this.user = user;
     }
 
-//    public NailServiceOption getNailServiceOption() {
-//        return nailServiceOption;
-//    }
-//
-//    public void setNailServiceOption(NailServiceOption nailServiceOption) {
-//        this.nailServiceOption = nailServiceOption;
-//    }
-//
-//    public NailServiceAddon getNailServiceAddon() {
-//        return nailServiceAddon;
-//    }
-//
-//    public void setNailServiceAddon(NailServiceAddon nailServiceAddon) {
-//        this.nailServiceAddon = nailServiceAddon;
-//    }
-
     public LocalDateTime getScheduledStartAt() {
         return scheduledStartAt;
     }
@@ -126,36 +91,12 @@ public class Appointment {
         this.serviceNameSnapshot = serviceNameSnapshot;
     }
 
-    public OptionType getOptionTypeSnapshot() {
-        return optionTypeSnapshot;
-    }
-
-    public void setOptionTypeSnapshot(OptionType optionTypeSnapshot) {
-        this.optionTypeSnapshot = optionTypeSnapshot;
-    }
-
     public BigDecimal getServicePriceSnapshot() {
         return servicePriceSnapshot;
     }
 
     public void setServicePriceSnapshot(BigDecimal servicePriceSnapshot) {
         this.servicePriceSnapshot = servicePriceSnapshot;
-    }
-
-    public String getAddonNameSnapshot() {
-        return addonNameSnapshot;
-    }
-
-    public void setAddonNameSnapshot(String addonNameSnapshot) {
-        this.addonNameSnapshot = addonNameSnapshot;
-    }
-
-    public BigDecimal getAddonPriceSnapshot() {
-        return addonPriceSnapshot;
-    }
-
-    public void setAddonPriceSnapshot(BigDecimal addonPriceSnapshot) {
-        this.addonPriceSnapshot = addonPriceSnapshot;
     }
 
     public BigDecimal getAppointmentValue() {

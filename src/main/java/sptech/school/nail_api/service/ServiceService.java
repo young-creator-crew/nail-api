@@ -10,7 +10,7 @@ import sptech.school.nail_api.dto.service.update.ServiceUpdateRequestDTO;
 import sptech.school.nail_api.mapper.ServiceMapper;
 import sptech.school.nail_api.entity.NailService;
 import sptech.school.nail_api.exception.service.ServiceAlreadyExistsException;
-import sptech.school.nail_api.exception.service.ServiceNotActiveExeption;
+import sptech.school.nail_api.exception.service.ServiceNotActiveException;
 import sptech.school.nail_api.exception.service.ServiceNotFoundException;
 import sptech.school.nail_api.repository.NailServiceRepository;
 
@@ -45,7 +45,7 @@ public class ServiceService {
     public ServiceResponseDTO get(Integer id) {
         NailService service = findById(id);
         if (!Boolean.TRUE.equals(service.getActive())){
-            throw new ServiceNotActiveExeption();
+            throw new ServiceNotActiveException();
         }
         return ServiceMapper.toResponseDTO(service);
     }
@@ -75,7 +75,7 @@ public class ServiceService {
     public ServiceResponseDTO update(ServiceUpdateRequestDTO request, Integer id) {
         NailService service = findById(id);
         if (!Boolean.TRUE.equals(service.getActive())) {
-            throw new ServiceNotActiveExeption();
+            throw new ServiceNotActiveException();
         }
         String serviceName = request.getServiceName().trim();
 
@@ -98,7 +98,7 @@ public class ServiceService {
     public void deactivate(Integer id) {
         NailService service = findById(id);
         if (!Boolean.TRUE.equals(service.getActive())) {
-            throw new ServiceNotActiveExeption();
+            throw new ServiceNotActiveException();
         }
         service.setActive(false);
         nailServiceRepository.save(service);

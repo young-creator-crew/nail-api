@@ -9,14 +9,10 @@ import java.time.LocalDateTime;
 
 public class AppointmentRequestDTO {
 
-    @Schema(description = "Identificador da modalidade do serviço.", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Identificador do serviço.", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull
     @Positive
-    private Integer serviceOptionId;
-
-    @Schema(description = "Identificador do adicional opcional. Pode ser nulo quando nenhum adicional for escolhido.", example = "2")
-    @Positive
-    private Integer addonId;
+    private Integer serviceId;
 
     @Schema(description = "Data e horário de início do atendimento.", type = "string", format = "date-time", example = "2026-10-30T09:00:00", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull
@@ -25,26 +21,17 @@ public class AppointmentRequestDTO {
     public AppointmentRequestDTO() {
     }
 
-    public AppointmentRequestDTO(Integer serviceOptionId, Integer addonId, LocalDateTime scheduledStartAt) {
-        this.serviceOptionId = serviceOptionId;
-        this.addonId = addonId;
+    public AppointmentRequestDTO(Integer serviceId, LocalDateTime scheduledStartAt) {
+        this.serviceId = serviceId;
         this.scheduledStartAt = scheduledStartAt;
     }
 
-    public Integer getServiceOptionId() {
-        return serviceOptionId;
+    public Integer getServiceId() {
+        return serviceId;
     }
 
-    public void setServiceOptionId(Integer serviceOptionId) {
-        this.serviceOptionId = serviceOptionId;
-    }
-
-    public Integer getAddonId() {
-        return addonId;
-    }
-
-    public void setAddonId(Integer addonId) {
-        this.addonId = addonId;
+    public void setServiceId(Integer serviceId) {
+        this.serviceId = serviceId;
     }
 
     public LocalDateTime getScheduledStartAt() {

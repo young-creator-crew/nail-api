@@ -1,6 +1,7 @@
 package sptech.school.nail_api.dto.media;
 
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import org.springframework.web.multipart.MultipartFile;
 
 public class MediaRequestDTO {
@@ -9,12 +10,13 @@ public class MediaRequestDTO {
     private MultipartFile media;
 
     @NotNull(message = "O ID do serviço é obrigatório.")
-    private Long serviceId;
+    @Positive(message = "O ID do serviço deve ser positivo.")
+    private Integer serviceId;
 
     public MediaRequestDTO() {
     }
 
-    public MediaRequestDTO(MultipartFile media, Long serviceId) {
+    public MediaRequestDTO(MultipartFile media, Integer serviceId) {
         this.media = media;
         this.serviceId = serviceId;
     }
@@ -27,11 +29,11 @@ public class MediaRequestDTO {
         this.media = media;
     }
 
-    public Long getServiceId() {
+    public Integer getServiceId() {
         return serviceId;
     }
 
-    public void setServiceId(Long serviceId) {
+    public void setServiceId(Integer serviceId) {
         this.serviceId = serviceId;
     }
 }

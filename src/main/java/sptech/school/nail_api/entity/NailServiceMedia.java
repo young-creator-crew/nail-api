@@ -9,26 +9,26 @@ public class NailServiceMedia {
     @Id
     @Column(name = "id_photo")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idImg;
+    private Integer idImg;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "fk_nail_service", nullable = false)
     private NailService nailService;
 
-    @Column(name = "img_url")
+    @Column(name = "img_url", nullable = false)
     private String imgUrl;
 
-    @Column(name = "object_name")
+    @Column(name = "object_name", nullable = false)
     private String objectName;
 
     public NailServiceMedia() {
     }
 
-    public Long getIdImg() {
+    public Integer getIdImg() {
         return idImg;
     }
 
-    public void setIdImg(Long idImg) {
+    public void setIdImg(Integer idImg) {
         this.idImg = idImg;
     }
 

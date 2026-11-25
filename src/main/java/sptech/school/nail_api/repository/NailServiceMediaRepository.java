@@ -5,7 +5,7 @@ import sptech.school.nail_api.entity.NailServiceMedia;
 
 import java.util.List;
 
-public interface NailServiceMediaRepository extends JpaRepository<NailServiceMedia, Long> {
+public interface NailServiceMediaRepository extends JpaRepository<NailServiceMedia, Integer> {
 
     List<NailServiceMedia> findByNailService_IdNailService(Integer idNailService);
 

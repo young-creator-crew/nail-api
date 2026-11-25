@@ -5,14 +5,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import sptech.school.nail_api.dto.exception.StandardErrorResponseDTO;
 import sptech.school.nail_api.exception.appointment.AppointmentConflictException;
 import sptech.school.nail_api.exception.appointment.AppointmentNotFoundException;
 import sptech.school.nail_api.exception.appointment.AppointmentValidationException;
 import sptech.school.nail_api.exception.auth.InvalidCredentialsException;
 import sptech.school.nail_api.exception.database.DataBaseAccessException;
+import sptech.school.nail_api.exception.media.MediaNotFoundException;
+import sptech.school.nail_api.exception.media.MediaStorageException;
 import sptech.school.nail_api.exception.service.ServiceAlreadyExistsException;
-import sptech.school.nail_api.exception.service.ServiceNotActiveExeption;
+import sptech.school.nail_api.exception.service.ServiceNotActiveException;
 import sptech.school.nail_api.exception.service.ServiceNotFoundException;
 import sptech.school.nail_api.exception.user.UserAlreadyExistsException;
 import sptech.school.nail_api.exception.user.UserNotFoundException;
@@ -142,8 +145,8 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(409).body(error);
     }
 
-    @ExceptionHandler(ServiceNotActiveExeption.class)
-    public ResponseEntity<StandardErrorResponseDTO> handleServiceNotActive(ServiceNotActiveExeption exception, HttpServletRequest request) {
+    @ExceptionHandler(ServiceNotActiveException.class)
+    public ResponseEntity<StandardErrorResponseDTO> handleServiceNotActive(ServiceNotActiveException exception, HttpServletRequest request) {
         StandardErrorResponseDTO error = new StandardErrorResponseDTO(
                 LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
                 422,
@@ -166,6 +169,60 @@ public class GlobalExceptionHandler {
         );
 
         return ResponseEntity.status(404).body(error);
+    }
+
+    @ExceptionHandler(MediaNotFoundException.class)
+    public ResponseEntity<StandardErrorResponseDTO> handleMediaNotFound(MediaNotFoundException exception, HttpServletRequest request) {
+        StandardErrorResponseDTO error = new StandardErrorResponseDTO(
+                LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
+                404,
+                "Not Found",
+                exception.getMessage(),
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(404).body(error);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<StandardErrorResponseDTO> handleInvalidArgument(IllegalArgumentException exception, HttpServletRequest request) {
+        StandardErrorResponseDTO error = new StandardErrorResponseDTO(
+                LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
+                400,
+                "Bad Request",
+                exception.getMessage(),
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(400).body(error);
+    }
+
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public ResponseEntity<StandardErrorResponseDTO> handleMaxUploadSizeExceeded(MaxUploadSizeExceededException exception, HttpServletRequest request) {
+        StandardErrorResponseDTO error = new StandardErrorResponseDTO(
+                LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
+                413,
+                "Payload Too Large",
+                "O arquivo excede o tamanho máximo permitido.",
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(413).body(error);
+    }
+
+    @ExceptionHandler(MediaStorageException.class)
+    public ResponseEntity<StandardErrorResponseDTO> handleMediaStorage(MediaStorageException exception, HttpServletRequest request) {
+        exception.printStackTrace();
+
+        StandardErrorResponseDTO error = new StandardErrorResponseDTO(
+                LocalDateTime.now(ZoneId.of("America/Sao_Paulo")),
+                502,
+                "Bad Gateway",
+                "Não foi possível acessar o armazenamento de imagens.",
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(502).body(error);
     }
 
     @ExceptionHandler(ServiceAlreadyExistsException.class)

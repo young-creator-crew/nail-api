@@ -39,7 +39,7 @@ public class AppointmentController {
     // GET: horários disponíveis para a data selecionada.
     @Operation(
             summary = "Consultar horários disponíveis",
-            description = "Retorna os horários disponíveis para a data e modalidade informadas, considerando a duração do serviço, o expediente e os agendamentos existentes."
+            description = "Retorna os horários disponíveis para a data e serviço informados, considerando a duração do serviço, o expediente e os agendamentos existentes."
     )
     @ApiResponses(value = {
             @ApiResponse(
@@ -52,7 +52,7 @@ public class AppointmentController {
                     )
             ),
             @ApiResponse(responseCode = "400", description = "Data inválida, passada ou parâmetros incorretos."),
-            @ApiResponse(responseCode = "404", description = "Modalidade de serviço não encontrada.")
+            @ApiResponse(responseCode = "404", description = "Serviço não encontrado.")
     })
     @GetMapping("/availability")
     public ResponseEntity<List<AvailableSlotResponseDTO>> getAvailableSlots(
@@ -61,19 +61,19 @@ public class AppointmentController {
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
             LocalDate date,
 
-            @Parameter(description = "Identificador da modalidade do serviço, utilizado para calcular a duração.", example = "1", required = true)
+            @Parameter(description = "Identificador do serviço, utilizado para calcular a duração.", example = "1", required = true)
             @RequestParam
-            Integer serviceOptionId
+            Integer serviceId
     ) {
         return ResponseEntity.ok(
-                appointmentService.getAvailableSlots(date, serviceOptionId)
+                appointmentService.getAvailableSlots(date, serviceId)
         );
     }
 
     // POST: criar um agendamento.
     @Operation(
             summary = "Criar agendamento",
-            description = "Cria um agendamento para o cliente identificado na rota, validando a modalidade, o adicional, o expediente e a disponibilidade."
+            description = "Cria um agendamento para o cliente identificado na rota, validando o serviço, o expediente e a disponibilidade."
     )
     @ApiResponses(value = {
             @ApiResponse(
@@ -84,7 +84,7 @@ public class AppointmentController {
                     )
             ),
             @ApiResponse(responseCode = "400", description = "Dados inválidos ou horário fora das regras de funcionamento."),
-            @ApiResponse(responseCode = "404", description = "Cliente, modalidade ou adicional não encontrado."),
+            @ApiResponse(responseCode = "404", description = "Cliente ou serviço não encontrado."),
             @ApiResponse(responseCode = "409", description = "Horário indisponível ou conflitante.")
     })
     @PostMapping("/{id}")
